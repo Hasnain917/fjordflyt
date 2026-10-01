@@ -13,21 +13,23 @@ if(isInsurance){
   ];
 
   app.innerHTML=`
-  <section class="insurance-hero">
-    <div class="insurance-hero-copy">
-      <div class="insurance-eyebrow">FIND YOUR CORNER OF NORWAY</div>
-      <h1>Extraordinary places.<br><span>Unforgettable water.</span></h1>
-      <p>From dramatic fjords to quiet island shores. Choose the backdrop for your next adventure.</p>
-      <a class="glow-button insurance-cta-btn" href="#destinations-grid">Explore locations</a>
-    </div>
-    <div class="insurance-hero-media">
-      <div class="insurance-hero-frame">
-        <img src="assets/locations-hero.webp" alt="Stavanger & the surrounding fjords" loading="eager">
-        <div class="insurance-hero-caption">📍 Stavanger &amp; the surrounding fjords</div>
+  <div class="insurance-hero-wrap">
+    <section class="insurance-hero">
+      <div class="insurance-hero-copy">
+        <div class="insurance-eyebrow">FIND YOUR CORNER OF NORWAY</div>
+        <h1>Extraordinary places.<br><span>Unforgettable water.</span></h1>
+        <p>From dramatic fjords to quiet island shores. Choose the backdrop for your next adventure.</p>
+        <a class="glow-button insurance-cta-btn" href="#destinations-grid">Explore locations</a>
       </div>
-      <div class="insurance-orbit-lines" aria-hidden="true"></div>
-    </div>
-  </section>
+      <div class="insurance-hero-media">
+        <div class="insurance-hero-frame">
+          <img src="assets/locations-hero.webp" alt="Stavanger & the surrounding fjords" loading="eager">
+          <div class="insurance-hero-caption">📍 Stavanger &amp; the surrounding fjords</div>
+        </div>
+        <div class="insurance-orbit-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+  </div>
 
   <div class="light-sections-wrapper">
     <div class="glass-ambient-layer" aria-hidden="true">

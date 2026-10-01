@@ -1215,7 +1215,24 @@ html.theme-dark .featured-photos-btn:hover {
 
 /* ============================================================
    INSURANCE / LOCATIONS PAGE STYLING
+   Edge-to-edge full width layout (no black bars on left/right)
    ============================================================ */
+.insurance-page main,
+body[data-page="insurance"] main,
+body[data-page="locations"] main {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.insurance-hero-wrap {
+  width: 100%;
+  background: #080b0c;
+  position: relative;
+  overflow: hidden;
+}
+
 .insurance-hero {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -1226,6 +1243,7 @@ html.theme-dark .featured-photos-btn:hover {
   padding: 75px 24px 85px;
   position: relative;
   min-height: 520px;
+  box-sizing: border-box;
 }
 
 .insurance-eyebrow {
@@ -1669,52 +1687,27 @@ html.theme-dark .featured-photos-btn:hover {
   position: relative;
   border-radius: 26px;
   overflow: hidden;
-  isolation: isolate;
   min-height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 44px 40px;
-  box-shadow: 0 25px 65px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
   background: url('assets/adventure-banner.webp') center/cover no-repeat;
-  contain: layout style paint;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.adventure-banner-card::before {
-  content: '';
-  position: absolute;
-  inset: -65%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 60deg,
-    rgba(56, 189, 248, 0.4) 75deg,
-    #38bdf8 85deg,
-    #ffffff 90deg,
-    #38bdf8 95deg,
-    rgba(56, 189, 248, 0.4) 105deg,
-    transparent 120deg,
-    transparent 240deg,
-    rgba(249, 115, 22, 0.4) 255deg,
-    #fb923c 265deg,
-    #ffffff 270deg,
-    #fb923c 275deg,
-    rgba(249, 115, 22, 0.4) 285deg,
-    transparent 300deg,
-    transparent 360deg
-  );
-  animation: neon-border-spin 8s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  transform: translateZ(0);
+.adventure-banner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 65px rgba(15, 23, 42, 0.22);
 }
 
 .adventure-banner-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 15, 26, 0.15) 0%, rgba(8, 15, 26, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(8, 15, 26, 0.08) 0%, rgba(8, 15, 26, 0.82) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -1754,57 +1747,78 @@ html.theme-dark .featured-photos-btn:hover {
   margin: 0;
 }
 
+/* Right Form Card with Sleek Luminous Aurora & Top Sweep Animation */
 .adventure-form-card {
   position: relative;
   border-radius: 26px;
   overflow: hidden;
-  isolation: isolate;
   padding: 44px 40px;
-  box-shadow: 0 25px 65px rgba(15, 23, 42, 0.15);
+  background: radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 55%), linear-gradient(165deg, #0d1e30, #081422);
+  box-shadow: 0 20px 55px rgba(2, 132, 199, 0.22), 0 0 35px rgba(56, 189, 248, 0.16);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  contain: layout style paint;
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  animation: form-aura-breathe 5s ease-in-out infinite alternate;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+.adventure-form-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Luminous high-speed top accent light sweep */
 .adventure-form-card::before {
   content: '';
   position: absolute;
-  inset: -65%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 65deg,
-    rgba(6, 182, 212, 0.4) 78deg,
-    #38bdf8 86deg,
-    #ffffff 90deg,
-    #38bdf8 94deg,
-    rgba(6, 182, 212, 0.4) 102deg,
-    transparent 115deg,
-    transparent 245deg,
-    rgba(14, 165, 233, 0.4) 258deg,
-    #60a5fa 266deg,
-    #ffffff 270deg,
-    #60a5fa 274deg,
-    rgba(14, 165, 233, 0.4) 282deg,
-    transparent 295deg,
-    transparent 360deg
-  );
-  animation: neon-border-spin 9s linear infinite;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #38bdf8 40%, #ffffff 50%, #fb923c 60%, transparent);
+  animation: form-top-sweep 3.5s ease-in-out infinite;
   pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  transform: translateZ(0);
+  z-index: 5;
 }
 
+/* Soft atmospheric corner glow */
 .adventure-form-card::after {
   content: '';
   position: absolute;
-  inset: 2px;
-  border-radius: 24px;
-  background: linear-gradient(145deg, #0d1e30, #081422);
-  z-index: 1;
+  width: 260px;
+  height: 260px;
+  right: -50px;
+  top: -50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(2, 132, 199, 0.05) 50%, transparent 70%);
   pointer-events: none;
+  z-index: 0;
+  animation: form-glow-float 6s ease-in-out infinite alternate;
+}
+
+@keyframes form-aura-breathe {
+  0% {
+    box-shadow: 0 20px 50px rgba(2, 132, 199, 0.2), 0 0 30px rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.3);
+  }
+  50% {
+    box-shadow: 0 25px 65px rgba(2, 132, 199, 0.35), 0 0 50px rgba(56, 189, 248, 0.28), -8px 0 35px rgba(249, 115, 22, 0.2);
+    border-color: rgba(56, 189, 248, 0.6);
+  }
+  100% {
+    box-shadow: 0 22px 55px rgba(2, 132, 199, 0.25), 0 0 35px rgba(14, 165, 233, 0.2), 8px 0 35px rgba(249, 115, 22, 0.25);
+    border-color: rgba(249, 115, 22, 0.45);
+  }
+}
+
+@keyframes form-top-sweep {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+@keyframes form-glow-float {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  100% { transform: scale(1.2) translate(-20px, 20px); opacity: 1; }
 }
 
 .adventure-form-card > * {
