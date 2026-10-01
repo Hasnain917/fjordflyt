@@ -139,6 +139,10 @@ app.innerHTML=`
       </div>
     </div>
     <div class="map-visual" id="map-visual">
+      <a href="https://maps.google.com/?q=Stavanger,Norway" target="_blank" rel="noopener" class="map-open-btn">
+        <span>Open in Maps</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+      </a>
       <div class="map-iframe-wrap">
         <iframe id="fjord-map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d200000!2d5.9!3d59.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sno!4v1700000000000!5m2!1sen!2sno" width="100%" height="100%" style="border:0" allowfullscreen loading="lazy" title="Fjord locations map" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
@@ -218,11 +222,53 @@ if(searchBtn){
     location.href=`booking.html?location=${encodeURIComponent(loc)}&experience=${encodeURIComponent(act)}${dt?'&date='+encodeURIComponent(dt):''}`;
   };
 }
+document.querySelectorAll('.map-pin').forEach(pin=>{
+  pin.onclick=()=>{
+    const name=pin.dataset.name;
+    const title=document.querySelector('.featured-title');
+    if(title&&name){
+      title.textContent=name;
+      const main=document.querySelector('#featured-main-img');
+      const pimg=pin.querySelector('img');
+      if(main&&pimg){
+        main.style.opacity='0';
+        setTimeout(()=>{main.src=pimg.src;main.style.opacity='1';},180);
+      }
+    }
+    const feat=document.querySelector('.featured-outer');
+    if(feat)feat.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+});
 }else{
 document.title='Book Your Water Experience — Fjordflyt';document.body.className='booking-page';let selected=new Set([new URLSearchParams(location.search).get('experience')||'rib']);selected=new Set([...selected].filter(id=>products.some(p=>p.id===id)));const quantities={rib:2,bicycle:1,lounge:2,taxi:1};let stage=1;let details={name:'',email:'',phone:''};const params=new URLSearchParams(location.search);let date=params.get('date')||'',time='10:00',departure=params.get('location')==='Bergen'?'Bergen':'Stavanger';const now=new Date();const today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;if(date<today)date='';const subtotal=p=>p.price*quantities[p.id]/p.step;const total=()=>products.filter(p=>selected.has(p.id)).reduce((v,p)=>v+subtotal(p),0);const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(){app.innerHTML=`<section class="booking-hero"><a href="./" class="back">Back to home</a><h1>${stage===1?'Choose Your Water Experience':stage===2?'Make it<br><span>your adventure.</span>':'Your adventure,<br><span>at a glance.</span>'}</h1><p>Select the experience you want to rent, choose your date and time,<br>and we’ll take care of the rest.</p><div class="steps">${['Choose experience','Date & time','Your details','Payment'].map((s,i)=>`<span class="${(stage===1?0:stage===2?2:3)===i?'current':''}"><b>${i+1}</b>${s}</span>`).join('')}</div></section><div class="booking-layout"><section class="panel" id="booking-content">${stage===1?`<h2>1. Choose your experience</h2><div class="booking-products">${products.map(p=>`<article class="book-card ${selected.has(p.id)?'selected':''}"><button class="select-product" data-product="${p.id}" aria-pressed="${selected.has(p.id)}" aria-label="Select ${p.name}"><img src="assets/${p.id}.webp" alt="${p.name}"><span class="check">${selected.has(p.id)?'✓':''}</span><div class="card-copy"><h3>${p.short}</h3><p>${p.description}</p><span class="price">${money(p.price)} <small>/ ${p.unit.replace('per ','')}</small></span></div></button><div style="padding:0 18px 18px"><small>${p.label}</small><div class="counter"><button data-change="-${p.step}" data-id="${p.id}" aria-label="Decrease ${p.short} ${p.label.toLowerCase()}">−</button><output>${quantities[p.id]} ${p.label.toLowerCase()}</output><button data-change="${p.step}" data-id="${p.id}" aria-label="Increase ${p.short} ${p.label.toLowerCase()}">+</button></div></div></article>`).join('')}</div>`:stage===2?`<h2>3. Your details</h2><form id="details-form"><div class="details-grid"><label class="field wide">Full name<input name="name" autocomplete="name" required value="${escape(details.name)}"></label><label class="field">Email address<input name="email" type="email" autocomplete="email" required value="${escape(details.email)}"></label><label class="field">Phone (optional)<input name="phone" type="tel" autocomplete="tel" value="${escape(details.phone)}"></label></div><p class="hint">Your details stay in this page during the preview. No reservation has been made.</p><div class="details-action"><button class="glow-button" type="submit">Review your experience</button><button class="text-button" type="button" id="back">Back</button></div></form>`:`<h2>4. Review & payment</h2><div class="review-block"><div class="eyebrow">Date & time</div><p>${escape(departure)} · ${escape(date)} at ${escape(time)}</p></div><div class="review-block"><div class="eyebrow">Your details</div><p>${escape(details.name)}<br>${escape(details.email)}${details.phone?'<br>'+escape(details.phone):''}</p></div><div class="review-block">${products.filter(p=>selected.has(p.id)).map(p=>`<p>${p.short} · ${quantities[p.id]} ${p.label.toLowerCase()} · ${money(subtotal(p))}</p>`).join('')}</div><p class="notice">Your experience is ready to review. Online reservations and payments are not available yet. This preview does not confirm availability, reserve a boat, or charge you.</p><div class="details-action"><button class="small-button" id="download">Download your plan</button><button class="text-button" id="back">Edit details</button></div>`}</section><aside class="panel summary"><h2>${stage===1?'2. Date & time':'Your experience'}</h2>${stage===1?`<label class="field">Departure location<select id="departure"><option ${departure==='Stavanger'?'selected':''}>Stavanger</option><option ${departure==='Bergen'?'selected':''}>Bergen</option></select></label><label class="field">Date<input id="date" type="date" min="${today}" value="${date}" required></label><label class="field">Departure time<select id="time">${['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'].map(t=>`<option ${time===t?'selected':''}>${t}</option>`).join('')}</select></label>`:''}${stage===1?`<div class="summary-people"><h2>3. Number of people</h2><span>Total people</span><div class="counter"><button data-change="-1" data-id="rib" aria-label="Decrease RIB passengers">−</button><output>${quantities.rib}</output><button data-change="1" data-id="rib" aria-label="Increase RIB passengers">+</button></div><p class="hint">For RIB Boat pricing · Up to 10 people</p></div>`:''}<div class="summary-lines"><h2>Order Summary</h2>${selected.size?products.filter(p=>selected.has(p.id)).map(p=>`<div class="summary-item"><img src="assets/${p.id}.webp" alt=""><div>${p.short}<small>${quantities[p.id]} ${p.label.toLowerCase()}</small></div><strong>${money(subtotal(p))}</strong></div>`).join(''):'<p>Select an experience to begin.</p>'}</div><div class="total"><span>Total</span><strong>${money(total())}</strong></div>${stage===1?'<button class="glow-button" id="continue">Continue to details</button><p id="error" class="error" role="alert"></p>':''}<p class="hint">Prices are based on the supplied experience guide. Availability and final booking terms require confirmation.</p></aside></div>`;
 document.querySelectorAll('[data-product]').forEach(b=>b.onclick=()=>{const id=b.dataset.product;selected.has(id)?selected.delete(id):selected.add(id);const y=scrollY;render();scrollTo(0,y)});document.querySelectorAll('[data-change]').forEach(b=>b.onclick=()=>{const id=b.dataset.id;const p=products.find(x=>x.id===id);quantities[id]=Math.min(p.id==='rib'?10:24,Math.max(p.step,quantities[id]+Number(b.dataset.change)));const y=scrollY;render();scrollTo(0,y)});if(stage===1){document.querySelector('#departure').onchange=e=>departure=e.target.value;document.querySelector('#date').onchange=e=>date=e.target.value;document.querySelector('#time').onchange=e=>time=e.target.value;document.querySelector('#continue').onclick=()=>{if(!selected.size){document.querySelector('#error').textContent='Please select at least one experience.';return}const field=document.querySelector('#date');if(!field.reportValidity())return;date=field.value;time=document.querySelector('#time').value;departure=document.querySelector('#departure').value;stage=2;render();scrollTo({top:0,behavior:'smooth'})}}if(stage===2){document.querySelector('#details-form').onsubmit=e=>{e.preventDefault();const data=new FormData(e.currentTarget);details=Object.fromEntries(data);stage=3;render();scrollTo({top:0,behavior:'smooth'})}}if(stage>1)document.querySelector('#back').onclick=()=>{if(stage===2){details=Object.fromEntries(new FormData(document.querySelector('#details-form')))}stage--;render()};if(stage===3)document.querySelector('#download').onclick=()=>{const text=`FJORDFLYT — YOUR WATER EXPERIENCE PLAN\n\nDeparture: ${departure}\nDate: ${date} at ${time}\nName: ${details.name}\nEmail: ${details.email}\n\n${products.filter(p=>selected.has(p.id)).map(p=>`${p.short}: ${quantities[p.id]} ${p.label.toLowerCase()} — ${money(subtotal(p))}`).join('\n')}\n\nTotal: ${money(total())}\n\nThis is a plan only. No reservation or payment has been made.`;const u=URL.createObjectURL(new Blob([text],{type:'text/plain'}));const a=document.createElement('a');a.href=u;a.download='fjordflyt-experience-plan.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
 }render();}
+// Theme Toggle with Moon and Sun icons
+const themeBtn=document.querySelector('#theme-toggle');
+const sunIcon=`<svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+const moonIcon=`<svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+function setTheme(theme){
+  if(theme==='dark'){
+    document.documentElement.classList.add('theme-dark');
+    document.documentElement.classList.remove('theme-light');
+    if(themeBtn){themeBtn.innerHTML=sunIcon;themeBtn.setAttribute('aria-label','Switch to light mode');themeBtn.title='Switch to light mode';}
+  }else{
+    document.documentElement.classList.remove('theme-dark');
+    document.documentElement.classList.add('theme-light');
+    if(themeBtn){themeBtn.innerHTML=moonIcon;themeBtn.setAttribute('aria-label','Switch to dark mode');themeBtn.title='Switch to dark mode';}
+  }
+}
+const savedTheme=localStorage.getItem('fjordflyt-theme')||'light';
+setTheme(savedTheme);
+if(themeBtn){
+  themeBtn.onclick=()=>{
+    const isDark=document.documentElement.classList.contains('theme-dark');
+    const next=isDark?'light':'dark';
+    localStorage.setItem('fjordflyt-theme',next);
+    setTheme(next);
+  };
+}
 // Original Huly footer composition and eight-second clock loop.
 const footerCTA=document.createElement('section');footerCTA.className='footer-cta';footerCTA.setAttribute('aria-label','Plan your next adventure');footerCTA.innerHTML=`<div class="footer-clock-stage" aria-hidden="true"><div class="clock-beam beam-warm"></div><div class="clock-beam beam-cool"></div><img id="footer-clock" src="assets/footer-clock-moving.webp" width="480" height="480" alt="" decoding="async"></div><div class="footer-cta-copy"><div class="eyebrow">Fjordflyt · Norway</div><h2>Your next<br>great moment.</h2><p>Explore Norway from the water.<br>Make time for something unforgettable.</p><div class="footer-actions"><a class="glow-button" href="${booking?'#booking-content':'booking.html'}">${booking?'Choose your experience':'Book your experience'}</a><a class="small-button" href="${booking?'./':'booking.html'}">${booking?'Back to home':'View booking page'}</a></div></div>`;document.querySelector('footer').before(footerCTA);
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
