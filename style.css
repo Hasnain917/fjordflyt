@@ -1909,104 +1909,123 @@ html.theme-dark .adv-field input { background: #111827; color: #f8fafc; border-c
 }
 
 /* ============================================================
-   BOOKING PAGE — THEME STYLING (Light Mode Default)
-   Matches website theme with full animation & dark mode support
+   BOOKING PAGE — THEME STYLING (Top-to-Bottom Black to White Gradient)
+   Allows main section laser animation to shine at the top while
+   content transitions into elegant light version below.
    ============================================================ */
 html:not(.theme-dark) body.booking-page {
-  background: linear-gradient(180deg, #f8fafc 0%, #f0f7ff 35%, #edf6fd 70%, #f8fafc 100%);
+  background: linear-gradient(180deg, 
+    #08090c 0px, 
+    #080c12 280px, 
+    #0d1624 400px, 
+    #172336 520px, 
+    #334155 640px, 
+    #64748b 760px, 
+    #cbd5e1 880px, 
+    #e2e8f0 1000px, 
+    #f8fafc 1150px, 
+    #ffffff 1300px, 
+    #ffffff 100%
+  );
   color: #0f1e33;
+  min-height: 100vh;
 }
 
 html:not(.theme-dark) .booking-page header a:not(.small-button) {
-  color: #334155;
+  color: #e2e8f0;
 }
 
 html:not(.theme-dark) .booking-page header a[aria-current=page] {
-  color: #0284c7;
-  border-bottom: 2px solid #0284c7;
+  color: #38bdf8;
+  border-bottom: 2px solid #38bdf8;
 }
 
 html:not(.theme-dark) .booking-page header a:hover {
-  color: #0284c7;
+  color: #38bdf8;
 }
 
 html:not(.theme-dark) .booking-page .brand img {
-  filter: invert(1) brightness(0.2);
+  filter: none;
 }
 
 html:not(.theme-dark) .booking-page .header-language {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 html:not(.theme-dark) .booking-page .theme-toggle {
-  background: rgba(15, 23, 42, 0.06);
-  border-color: #cbd5e1;
-  color: #0f1e33;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 html:not(.theme-dark) .booking-page #menu {
-  color: #0f1e33;
+  color: #ffffff;
 }
 
 html:not(.theme-dark) .booking-page #reference-motion {
-  opacity: 0.25;
-  mix-blend-mode: screen;
+  opacity: 1;
+  mix-blend-mode: lighten;
+  mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 98%);
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 98%);
 }
 
-/* Booking Hero Light */
+/* Booking Hero (In Top Dark Zone) */
 html:not(.theme-dark) .booking-hero .back {
-  color: #0284c7;
+  color: #38bdf8;
   font-weight: 600;
 }
 
 html:not(.theme-dark) .booking-hero .back:hover {
-  color: #0369a1;
+  color: #7dd3fc;
 }
 
 html:not(.theme-dark) .booking-hero h1 {
-  color: #0f1e33;
+  color: #ffffff;
   font-weight: 800;
 }
 
 html:not(.theme-dark) .booking-hero h1 span {
-  color: #0284c7;
+  color: #38bdf8;
 }
 
 html:not(.theme-dark) .booking-hero p {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 html:not(.theme-dark) .booking-page .steps {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 html:not(.theme-dark) .booking-page .steps span b {
-  border-color: #cbd5e1;
-  background: #ffffff;
-  color: #475569;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
 }
 
 html:not(.theme-dark) .booking-page .steps span.current {
-  color: #0f1e33;
+  color: #ffffff;
   font-weight: 700;
 }
 
 html:not(.theme-dark) .booking-page .steps span.current b {
-  border-color: #0284c7;
+  border-color: #38bdf8;
   background: #0284c7;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
 }
 
 html:not(.theme-dark) .booking-page .steps span:not(:last-child):after {
-  background: #cbd5e1;
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* Booking Layout & Glass Panel Light */
 html:not(.theme-dark) .booking-page .booking-layout {
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08), 0 0 30px rgba(56, 189, 248, 0.12);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 25px 65px rgba(15, 23, 42, 0.12), 0 0 35px rgba(56, 189, 248, 0.18);
+  border-radius: 27px;
 }
 
 html:not(.theme-dark) .booking-page .booking-layout > .summary {
