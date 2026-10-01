@@ -1909,22 +1909,24 @@ html.theme-dark .adv-field input { background: #111827; color: #f8fafc; border-c
 }
 
 /* ============================================================
-   BOOKING PAGE — THEME STYLING (Top-to-Bottom Black to White Gradient)
-   Allows main section laser animation to shine at the top while
-   content transitions into elegant light version below.
+   BOOKING PAGE — THEME STYLING (Smooth Fade Black to White Gradient)
+   Ultra-smooth atmospheric fade with clean, elegant light layout
+   and zero dirty shadows or color bleeding on sides.
    ============================================================ */
 html:not(.theme-dark) body.booking-page {
   background: linear-gradient(180deg, 
     #08090c 0px, 
-    #080c12 280px, 
-    #0d1624 400px, 
-    #172336 520px, 
-    #334155 640px, 
-    #64748b 760px, 
-    #cbd5e1 880px, 
-    #e2e8f0 1000px, 
-    #f8fafc 1150px, 
-    #ffffff 1300px, 
+    #08090c 160px, 
+    #0a0f19 220px, 
+    #101a2b 270px, 
+    #1b2b44 320px, 
+    #384f70 370px, 
+    #6b84a6 410px, 
+    #afc1d6 450px, 
+    #dce5ef 490px, 
+    #f1f5f9 530px, 
+    #f8fafc 580px, 
+    #ffffff 650px, 
     #ffffff 100%
   );
   color: #0f1e33;
@@ -1965,8 +1967,8 @@ html:not(.theme-dark) .booking-page #menu {
 html:not(.theme-dark) .booking-page #reference-motion {
   opacity: 1;
   mix-blend-mode: lighten;
-  mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 98%);
-  -webkit-mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 98%);
+  mask-image: linear-gradient(180deg, black 0%, black 50%, transparent 85%);
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 50%, transparent 85%);
 }
 
 /* Booking Hero (In Top Dark Zone) */
@@ -2018,18 +2020,26 @@ html:not(.theme-dark) .booking-page .steps span:not(:last-child):after {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Booking Layout & Glass Panel Light */
+/* Booking Layout Light — Clean, Soft & Natural Shadows */
 html:not(.theme-dark) .booking-page .booking-layout {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(226, 232, 240, 0.95);
-  box-shadow: 0 25px 65px rgba(15, 23, 42, 0.12), 0 0 35px rgba(56, 189, 248, 0.18);
-  border-radius: 27px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.05);
+  border-radius: 24px;
+}
+
+/* Disable dark orbs/trails bleeding out of booking-layout onto white sides */
+html:not(.theme-dark) .booking-page .booking-layout > .section-motion,
+html:not(.theme-dark) .booking-page .booking-layout::before,
+html:not(.theme-dark) .booking-page .booking-layout::after,
+html:not(.theme-dark) .booking-page .booking-layout > .summary::before,
+html:not(.theme-dark) .booking-page .booking-layout > .summary::after {
+  display: none !important;
 }
 
 html:not(.theme-dark) .booking-page .booking-layout > .summary {
-  border-left: 1.5px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+  box-shadow: none !important;
 }
 
 html:not(.theme-dark) .booking-page .panel h2 {
@@ -2041,7 +2051,18 @@ html:not(.theme-dark) .booking-page .panel h2 {
 html:not(.theme-dark) .booking-page .book-card {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+html:not(.theme-dark) .booking-page .book-card:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
+  transform: translateY(-2px);
+}
+
+html:not(.theme-dark) .booking-page .book-card.selected {
+  border-color: #0284c7;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.18);
 }
 
 html:not(.theme-dark) .booking-page .book-card.selected {
