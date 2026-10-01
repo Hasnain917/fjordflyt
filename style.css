@@ -41,11 +41,11 @@ header,main{max-width:1200px}header{height:128px;padding:15px 3.5%;align-items:c
 .orb-blue{left:-25%;top:-15%}
 .orb-violet{right:-24%;top:20%;background:radial-gradient(ellipse,rgba(136,68,255,.23),rgba(94,56,238,.06) 40%,transparent 70%);animation-name:ambient-counter;animation-duration:17s;animation-delay:-8s}
 .orb-amber{left:32%;bottom:-40%;width:65%;height:85%;background:radial-gradient(ellipse,rgba(255,132,52,.17),rgba(255,100,35,.04) 40%,transparent 70%);animation-duration:19s;animation-delay:-9s}
-.motion-grid{position:absolute;inset:-60%;opacity:.16;background-image:linear-gradient(#508cc53d 1px,transparent 1px),linear-gradient(90deg,#508cc53d 1px,transparent 1px);background-size:64px 64px;transform:perspective(600px) rotateX(48deg) rotateZ(-12deg);mask-image:radial-gradient(ellipse,black,transparent 65%);animation:grid-flow 14s linear infinite}
-.motion-trails{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:.65}
+.motion-grid{position:absolute;inset:-60%;opacity:.12;background-image:linear-gradient(#508cc53d 1px,transparent 1px),linear-gradient(90deg,#508cc53d 1px,transparent 1px);background-size:64px 64px;transform:perspective(600px) rotateX(48deg) rotateZ(-12deg);mask-image:radial-gradient(ellipse,black,transparent 65%);pointer-events:none}
+.motion-trails{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:.55;pointer-events:none}
 .motion-trails path{fill:none;vector-effect:non-scaling-stroke}
 .trail-base{stroke:#679bff;stroke-width:.6;opacity:.13}
-.trail-light{stroke-width:1.5;stroke-linecap:round;stroke-dasharray:5 95;animation:neon-travel 9s linear infinite;filter:drop-shadow(0 0 4px currentColor) drop-shadow(0 0 10px currentColor)}
+.trail-light{stroke-width:1.5;stroke-linecap:round;stroke-dasharray:5 95;animation:neon-travel 9s linear infinite;filter:drop-shadow(0 0 4px currentColor);will-change:stroke-dashoffset}
 .trail-blue{stroke:#8bdcff;color:#329dff}
 .trail-amber{stroke:#ffc498;color:#ff873f;animation-duration:12s;animation-delay:-5s}
 .home-services>.section-motion{inset:-60px -4%}.home-services .orb-blue{opacity:1.4}.home-services .motion-trails{opacity:.8}
@@ -154,55 +154,55 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
 .ambient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(85px);
-  opacity: 0.65;
+  opacity: 0.72;
   pointer-events: none;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 .ambient-orb-1 {
-  width: 580px;
-  height: 580px;
+  width: 560px;
+  height: 560px;
   top: 4%;
   left: -8%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, rgba(14, 165, 233, 0.15) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.32) 0%, rgba(14, 165, 233, 0.12) 40%, rgba(56, 189, 248, 0.02) 65%, transparent 75%);
   animation: orbDrift1 22s ease-in-out infinite alternate;
 }
 
 .ambient-orb-2 {
-  width: 680px;
-  height: 680px;
+  width: 640px;
+  height: 640px;
   top: 42%;
   right: -10%;
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.35) 0%, rgba(56, 189, 248, 0.16) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.26) 0%, rgba(56, 189, 248, 0.11) 40%, rgba(2, 132, 199, 0.02) 65%, transparent 75%);
   animation: orbDrift2 26s ease-in-out infinite alternate;
 }
 
 .ambient-orb-3 {
-  width: 620px;
-  height: 620px;
+  width: 600px;
+  height: 600px;
   bottom: 5%;
   left: 12%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.22) 0%, rgba(56, 189, 248, 0.2) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, rgba(56, 189, 248, 0.12) 40%, rgba(249, 115, 22, 0.02) 65%, transparent 75%);
   animation: orbDrift3 24s ease-in-out infinite alternate;
 }
 
 @keyframes orbDrift1 {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(110px, 80px, 0) scale(1.12); }
-  100% { transform: translate3d(50px, 150px, 0) scale(0.96); }
+  50% { transform: translate3d(80px, 60px, 0) scale(1.08); }
+  100% { transform: translate3d(40px, 110px, 0) scale(0.96); }
 }
 
 @keyframes orbDrift2 {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-110px, 90px, 0) scale(1.14); }
-  100% { transform: translate3d(-40px, -70px, 0) scale(0.94); }
+  50% { transform: translate3d(-80px, 65px, 0) scale(1.09); }
+  100% { transform: translate3d(-30px, -50px, 0) scale(0.95); }
 }
 
 @keyframes orbDrift3 {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(85px, -95px, 0) scale(1.15); }
-  100% { transform: translate3d(-40px, 45px, 0) scale(1.02); }
+  50% { transform: translate3d(60px, -70px, 0) scale(1.1); }
+  100% { transform: translate3d(-30px, 35px, 0) scale(1.02); }
 }
 
 /* ============================================================
@@ -225,12 +225,10 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
   align-items: center;
   flex-wrap: wrap;
   gap: 14px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
   border-radius: 22px;
-  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   padding: 18px 24px;
   box-sizing: border-box;
   transition: all 0.35s ease;
@@ -446,47 +444,48 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
   flex-direction: column;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  contain: layout style paint;
 }
 
 /* Moving neon photon beam running around the border */
 .dest-card::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
     transparent 60deg,
-    rgba(14, 165, 233, 0.3) 75deg,
+    rgba(14, 165, 233, 0.35) 75deg,
     #38bdf8 84deg,
     #ffffff 90deg,
     #38bdf8 96deg,
-    rgba(14, 165, 233, 0.3) 105deg,
+    rgba(14, 165, 233, 0.35) 105deg,
     transparent 120deg,
     transparent 240deg,
-    rgba(6, 182, 212, 0.3) 255deg,
+    rgba(6, 182, 212, 0.35) 255deg,
     #67e8f9 264deg,
     #ffffff 270deg,
     #67e8f9 276deg,
-    rgba(6, 182, 212, 0.3) 285deg,
+    rgba(6, 182, 212, 0.35) 285deg,
     transparent 300deg,
     transparent 360deg
   );
   animation: neon-border-spin 6.5s linear infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
-/* Frosted glass inner container */
+/* Crisp inner container (zero GPU blur cost, brilliant neon border) */
 .dest-card::after {
   content: '';
   position: absolute;
   inset: 1.8px;
   border-radius: 18.2px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: #ffffff;
   z-index: 1;
   pointer-events: none;
   transition: background 0.35s ease;
@@ -505,12 +504,12 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
 .dest-card:nth-child(5)::before { animation-delay: -5.2s; }
 
 .dest-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 42px rgba(14, 165, 233, 0.25), 0 0 25px rgba(56, 189, 248, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(14, 165, 233, 0.22), 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
 .dest-card:hover::before {
-  animation-duration: 3.2s; /* Speeds up smoothly on hover */
+  animation-duration: 3.5s;
 }
 
 .dest-card-media {
@@ -616,40 +615,40 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
 .map-content::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
     transparent 65deg,
-    rgba(6, 182, 212, 0.35) 78deg,
+    rgba(6, 182, 212, 0.4) 78deg,
     #38bdf8 86deg,
     #ffffff 90deg,
     #38bdf8 94deg,
-    rgba(6, 182, 212, 0.35) 102deg,
+    rgba(6, 182, 212, 0.4) 102deg,
     transparent 115deg,
     transparent 245deg,
-    rgba(14, 165, 233, 0.35) 258deg,
+    rgba(14, 165, 233, 0.4) 258deg,
     #60a5fa 266deg,
     #ffffff 270deg,
     #60a5fa 274deg,
-    rgba(14, 165, 233, 0.35) 282deg,
+    rgba(14, 165, 233, 0.4) 282deg,
     transparent 295deg,
     transparent 360deg
   );
   animation: neon-border-spin 11s linear infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
-/* Frosted glass surface */
+/* Crisp glass inner surface */
 .map-content::after {
   content: '';
   position: absolute;
   inset: 2px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: #ffffff;
   z-index: 1;
   pointer-events: none;
   transition: background 0.35s ease;
@@ -853,7 +852,7 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
 .featured-section::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
@@ -876,17 +875,17 @@ html.motion-paused .section-motion *,html.motion-paused .clock-beam{animation-pl
   animation: neon-border-spin 8.5s linear infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
-/* Frosted glass inner fill */
+/* Crisp inner fill */
 .featured-section::after {
   content: '';
   position: absolute;
   inset: 2px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: #ffffff;
   z-index: 1;
   pointer-events: none;
   transition: background 0.35s ease;
@@ -1126,7 +1125,7 @@ html.theme-dark .dest-view-all {
 html.theme-dark .dest-view-all:hover { background: #1e293b; border-color: #38bdf8; }
 
 html.theme-dark .dest-card::after {
-  background: rgba(17, 24, 39, 0.88);
+  background: #0f172a;
 }
 
 html.theme-dark .dest-card {
@@ -1434,29 +1433,30 @@ html.theme-dark .featured-photos-btn:hover {
   flex-direction: column;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  contain: layout style paint;
 }
 
 .loc-dest-card::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
     transparent 60deg,
-    rgba(14, 165, 233, 0.3) 75deg,
+    rgba(14, 165, 233, 0.35) 75deg,
     #38bdf8 84deg,
     #ffffff 90deg,
     #38bdf8 96deg,
-    rgba(14, 165, 233, 0.3) 105deg,
+    rgba(14, 165, 233, 0.35) 105deg,
     transparent 120deg,
     transparent 240deg,
-    rgba(6, 182, 212, 0.3) 255deg,
+    rgba(6, 182, 212, 0.35) 255deg,
     #67e8f9 264deg,
     #ffffff 270deg,
     #67e8f9 276deg,
-    rgba(6, 182, 212, 0.3) 285deg,
+    rgba(6, 182, 212, 0.35) 285deg,
     transparent 300deg,
     transparent 360deg
   );
@@ -1464,6 +1464,8 @@ html.theme-dark .featured-photos-btn:hover {
   animation-delay: var(--neon-delay, 0s);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .loc-dest-card::after {
@@ -1471,9 +1473,7 @@ html.theme-dark .featured-photos-btn:hover {
   position: absolute;
   inset: 1.8px;
   border-radius: 18.2px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: #ffffff;
   z-index: 1;
   pointer-events: none;
   transition: background 0.35s ease;
@@ -1594,13 +1594,11 @@ html.theme-dark .featured-photos-btn:hover {
 }
 
 .benefits-inner {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
   border-radius: 24px;
   padding: 40px 36px;
-  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05);
 }
 
 .benefits-header {
@@ -1679,12 +1677,13 @@ html.theme-dark .featured-photos-btn:hover {
   padding: 44px 40px;
   box-shadow: 0 25px 65px rgba(15, 23, 42, 0.12);
   background: url('assets/adventure-banner.webp') center/cover no-repeat;
+  contain: layout style paint;
 }
 
 .adventure-banner-card::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
@@ -1707,6 +1706,8 @@ html.theme-dark .featured-photos-btn:hover {
   animation: neon-border-spin 8s linear infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .adventure-banner-card::after {
@@ -1759,17 +1760,17 @@ html.theme-dark .featured-photos-btn:hover {
   overflow: hidden;
   isolation: isolate;
   padding: 44px 40px;
-  background: linear-gradient(145deg, #0d1e30, #081422);
   box-shadow: 0 25px 65px rgba(15, 23, 42, 0.15);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  contain: layout style paint;
 }
 
 .adventure-form-card::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  inset: -65%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
@@ -1792,6 +1793,18 @@ html.theme-dark .featured-photos-btn:hover {
   animation: neon-border-spin 9s linear infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.adventure-form-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #0d1e30, #081422);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .adventure-form-card > * {
@@ -1902,14 +1915,24 @@ html.theme-dark .insurance-dest-header h2 { color: #f8fafc; }
 html.theme-dark .insurance-dest-header p { color: #94a3b8; }
 html.theme-dark .loc-filter-tab { background: #111827; color: #94a3b8; border-color: rgba(255, 255, 255, 0.15); }
 html.theme-dark .loc-filter-tab.active { background: #0284c7; color: #fff; border-color: #0284c7; }
-html.theme-dark .loc-dest-card::after { background: rgba(17, 24, 39, 0.88); }
+html.theme-dark .loc-dest-card::after { background: #0f172a; }
 html.theme-dark .loc-card-body h3 { color: #f8fafc; }
 html.theme-dark .loc-card-body p { color: #94a3b8; }
-html.theme-dark .benefits-inner { background: rgba(17, 24, 39, 0.72); border-color: rgba(255, 255, 255, 0.1); }
+html.theme-dark .benefits-inner { background: #0f172a; border-color: rgba(255, 255, 255, 0.1); }
 html.theme-dark .benefit-item h4 { color: #f8fafc; }
 html.theme-dark .benefit-item p { color: #94a3b8; }
 html.theme-dark .benefit-icon-circle { background: #1e293b; color: #38bdf8; }
 html.theme-dark .adv-field select,
 html.theme-dark .adv-field input { background: #111827; color: #f8fafc; border-color: rgba(255, 255, 255, 0.12); }
+
+/* Modern content-visibility optimization for 120fps scrolling performance */
+.map-section,
+.featured-outer,
+.insurance-benefits-bar,
+.adventure-split-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 550px;
+}
+
 
 

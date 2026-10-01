@@ -482,7 +482,9 @@ const footerClock=document.querySelector('#footer-clock');function updateFooterP
 function applyMotionState(){document.documentElement.classList.toggle('motion-paused',motionPaused);motionButton.textContent=motionPaused?'Resume animations':'Pause animations';motionButton.setAttribute('aria-pressed',String(motionPaused));updatePlayback();updateFooterPlayback()}
 motionButton.onclick=()=>{motionPaused=!motionPaused;applyMotionState()};mediaPreference.addEventListener('change',event=>{motionPaused=event.matches;applyMotionState()});
 document.addEventListener('visibilitychange',updatePlayback);addEventListener('resize',scheduleMotionLayout,{passive:true});
-new ResizeObserver(scheduleMotionLayout).observe(app);if(document.fonts)document.fonts.ready.then(scheduleMotionLayout);
+let layoutTimer;
+const debouncedMotionLayout=()=>{clearTimeout(layoutTimer);layoutTimer=setTimeout(scheduleMotionLayout,80);};
+new ResizeObserver(debouncedMotionLayout).observe(app);if(document.fonts)document.fonts.ready.then(scheduleMotionLayout);
 // Match the reference's warm spotlight at the right end of each CTA.
 function prepareGlows(){document.querySelectorAll('.glow-button:not([data-glow-ready])').forEach(button=>{button.dataset.glowReady='true';const label=document.createElement('span');label.className='glow-label';while(button.firstChild)label.append(button.firstChild);button.append(label);const core=document.createElement('span');core.className='reference-button-core';core.setAttribute('aria-hidden','true');button.append(core)})}
 // Decorative layers are recreated after booking selections replace the page content.
@@ -494,7 +496,19 @@ function prepareSectionMotion(){
   section.prepend(layer);
  });
 }
-new MutationObserver(()=>{prepareGlows();prepareSectionMotion();scheduleMotionLayout()}).observe(app,{childList:true,subtree:true});
-addEventListener('pointermove',event=>{const button=event.target.closest('.glow-button');if(button){const r=button.getBoundingClientRect();button.style.setProperty('--light-x',Math.max(0,Math.min(r.width,event.clientX-r.left))+'px')}},{passive:true});
+new MutationObserver(()=>{prepareGlows();prepareSectionMotion();debouncedMotionLayout()}).observe(app,{childList:true,subtree:true});
+let pointerRaf=false;
+addEventListener('pointermove',event=>{
+  const button=event.target.closest('.glow-button');
+  if(!button)return;
+  if(!pointerRaf){
+    pointerRaf=true;
+    requestAnimationFrame(()=>{
+      const r=button.getBoundingClientRect();
+      button.style.setProperty('--light-x',Math.max(0,Math.min(r.width,event.clientX-r.left))+'px');
+      pointerRaf=false;
+    });
+  }
+},{passive:true});
 addEventListener('pointerout',event=>{const button=event.target.closest('.glow-button');if(button&&!button.contains(event.relatedTarget))button.style.removeProperty('--light-x')},{passive:true});
 prepareGlows();prepareSectionMotion();positionOriginalMotion();applyMotionState();
