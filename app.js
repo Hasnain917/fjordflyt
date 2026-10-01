@@ -1,8 +1,173 @@
 const products=[{id:'rib',name:'Passenger RIB Boat',short:'RIB Boat',description:'High-speed adventure on the water with a professional skipper.',price:1000,unit:'per person',label:'People',step:1},{id:'bicycle',name:'Water Bicycle',short:'Water Bicycle',description:'Explore at your own pace on a fun, eco-friendly water bike.',price:300,unit:'per hour',label:'Hours',step:1},{id:'lounge',name:'Inflatable Water Lounge',short:'Inflatable Yacht',description:'Relax and unwind on a spacious floating lounge with family and friends.',price:2000,unit:'per 2 hours',label:'Hours',step:2},{id:'taxi',name:'Private Taxi Boat',short:'Taxi Boat',description:'Private transport on the water with a skipper.',price:5000,unit:'per hour',label:'Hours',step:1}];
 const app=document.querySelector('#app');const booking=document.body.dataset.page==='booking'||/\/booking(?:\.html)?\/?$/.test(location.pathname);const money=v=>'NOK '+v.toLocaleString('en-US');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.querySelector('#year').textContent=new Date().getFullYear();document.querySelector('#menu').onclick=e=>{const open=document.querySelector('nav').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)};
-if(!booking){app.innerHTML=`<section class="hero"><h1>Rent Premium Water<br>Experiences in Norway</h1><p>FjordFlyt offers high-quality water bicycles, RIB boats,<br class="desktop-break"> inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p><a class="glow-button" href="booking.html">BOOK IT NOW</a></section><section class="gallery-section"><div class="gallery-frame"><div class="gallery" aria-label="Water experience gallery">${['lounge','rib','yacht','bicycle','taxi'].map((id,i)=>`<button class="gallery-card" data-slide="${i}" aria-label="View ${id} experience"><img src="assets/${id}.webp" alt="${id==='yacht'?'Inflatable water yachts':products.find(p=>p.id===id).name}"></button>`).join('')}</div><div class="gallery-controls"><button class="prev" aria-label="Previous image">‹</button>${Array.from({length:5},(_,i)=>`<button class="dot" data-slide="${i}" aria-label="Show image ${i+1}"></button>`).join('')}<span id="slide-count" aria-live="off">3 / 5</span><button class="next" aria-label="Next image">›</button></div></div><div class="gallery-caption">Everything you need for unforgettable journeys in Norway.</div><p class="experience-tags">Fjord Cruises <span>•</span> Private Charters <span>•</span> Guided Tours <span>•</span> Nature Experiences <span>•</span> Luxury Travel</p></section><section class="home-services" id="experiences"><div class="services-intro"><h2>Rent Premium Water<br>Experiences in Norway</h2><p>FjordFlyt offers high-quality water bicycles,<br>RIB boats, inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p><span class="norway-flag" aria-label="Norway">🇳🇴</span></div>${[{id:'bicycle',name:'Water Bicycle',image:'bicycle',text:'Explore fjords at your own pace on a fun and eco-friendly water bike.',icon:'🚲'},{id:'rib',name:'Passenger RIB Boat',image:'rib',text:'Experience high-speed adventure with our safe and comfortable RIB boat tours.',icon:'⛵'},{id:'lounge',name:'Inflatable Water Lounge',image:'lounge',text:'Relax and unwind on the water with our spacious inflatable lounge platforms.',icon:'☀'},{id:'lounge',name:'Inflatable Water Yacht',image:'yacht',text:'Indulge in luxury on the water with our exclusive inflatable yacht experience.',icon:'⛵'}].map((p,i)=>`<a class="home-service service-${i}" href="booking.html?experience=${p.id}"><img src="assets/${p.image}.webp" alt="${p.name}" loading="lazy"><div class="home-service-copy"><span class="service-icon" aria-hidden="true">${p.icon}</span><h3>${p.name}</h3><p>${p.text}</p></div></a>`).join('')}</section>`;
+if(!booking){
+const destinations=[
+  {id:'lysefjorden',name:'Lysefjorden',img:'assets/lysefjorden.webp',tags:'Waterfalls · Pulpit Rock · Stunning fjord scenery'},
+  {id:'idse',name:'Idse',img:'assets/idse.webp',tags:'Beaches · Islands · Calm waters'},
+  {id:'hidlefjorden',name:'Hidlefjorden',img:'assets/hardangerfjord.webp',tags:'Islands · Swimming · Great for groups'},
+  {id:'hundvag',name:'Hundvåg',img:'assets/mostraumen.webp',tags:'Beaches · Snorkeling · Family friendly'},
+  {id:'ryfylke',name:'Ryfylke',img:'assets/fosnavag.webp',tags:'Fjord adventure · Nature & wildlife'}
+];
+app.innerHTML=`
+<section class="hero">
+  <h1>Rent Premium Water<br>Experiences in Norway</h1>
+  <p>FjordFlyt offers high-quality water bicycles, RIB boats,<br class="desktop-break"> inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p>
+  <a class="glow-button" href="booking.html">BOOK IT NOW</a>
+</section>
+
+<div class="light-sections-wrapper">
+<section class="trust-bar" aria-label="Key benefits">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-icon">📅</div><div><strong>Flexible booking</strong><p>Free change or cancel up to 24 hours</p></div></div>
+    <div class="trust-item"><div class="trust-icon">⛅</div><div><strong>Weather guarantee</strong><p>Reschedule if unsafe weather</p></div></div>
+    <div class="trust-item"><div class="trust-icon">💳</div><div><strong>Secure payment</strong><p>Pay online with trusted partner</p></div></div>
+    <div class="trust-item"><div class="trust-icon">🎧</div><div><strong>Local support</strong><p>We are here to help you</p></div></div>
+    <div class="trust-item"><div class="trust-icon">👨‍👩‍👧</div><div><strong>Family friendly</strong><p>Perfect for groups, families and friends</p></div></div>
+  </div>
+</section>
+
+<section class="dest-section reveal" id="locations">
+  <div class="dest-heading">
+    <div class="dest-heading-left">
+      <div class="eyebrow">EXPLORE OUR TOP DESTINATIONS</div>
+      <h2>Choose Your Location</h2>
+      <p>We have multiple locations around Stavanger and nearby fjords.<br>Each location offers unique views, islands and activities.</p>
+    </div>
+    <a class="small-button dest-view-all" href="booking.html">View all locations →</a>
+  </div>
+  <div class="dest-carousel-wrap">
+    <button class="dest-arrow dest-prev" aria-label="Previous destination">&#8249;</button>
+    <div class="dest-carousel" id="dest-carousel">
+      ${destinations.map((d,i)=>`
+      <a class="dest-card reveal" href="booking.html?location=${d.id}" style="--delay:${i*0.08}s">
+        <img src="${d.img}" alt="${d.name}" loading="lazy">
+        <div class="dest-card-footer">
+          <div>
+            <div class="dest-card-name">${d.name}</div>
+            <div class="dest-card-tags">${d.tags}</div>
+          </div>
+          <button class="dest-card-arrow" aria-label="View ${d.name}" tabindex="-1">›</button>
+        </div>
+      </a>`).join('')}
+    </div>
+    <button class="dest-arrow dest-next" aria-label="Next destination">&#8250;</button>
+  </div>
+</section>
+
+<section class="map-section reveal" id="map-section">
+  <div class="map-content">
+    <div class="map-sidebar">
+      <div class="eyebrow">OUR LOCATIONS</div>
+      <h2>Explore on Map</h2>
+      <p>Click on a location to see photos, information and available activities.</p>
+      <div class="map-legend">
+        <div class="map-legend-item"><span class="legend-dot legend-our"></span>Our locations</div>
+        <div class="map-legend-item"><span class="legend-dot legend-popular"></span>Popular spots</div>
+        <div class="map-legend-item"><span class="legend-line"></span>Boat routes</div>
+        <div class="map-legend-item"><span class="legend-rect"></span>Recommended areas</div>
+      </div>
+    </div>
+    <div class="map-visual" id="map-visual">
+      <div class="map-iframe-wrap">
+        <iframe
+          id="fjord-map"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d200000!2d5.9!3d59.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sno!4v1700000000000!5m2!1sen!2sno"
+          width="100%" height="100%" style="border:0" allowfullscreen loading="lazy"
+          title="Fjord locations map" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="map-pin" style="left:36%;top:58%" data-name="Stavanger"><img src="assets/fosnavag.webp" alt="Stavanger"><span>Stavanger</span></div>
+      <div class="map-pin" style="left:48%;top:19%" data-name="Lysefjorden"><img src="assets/lysefjorden.webp" alt="Lysefjorden"><span>Lysefjorden</span></div>
+      <div class="map-pin" style="left:61%;top:30%" data-name="Idse"><img src="assets/idse.webp" alt="Idse"><span>Idse</span></div>
+      <div class="map-pin" style="left:53%;top:48%" data-name="Hidlefjorden"><img src="assets/hardangerfjord.webp" alt="Hidlefjorden"><span>Hidlefjorden</span></div>
+      <div class="map-pin" style="left:73%;top:42%" data-name="Ryfylke"><img src="assets/voss.webp" alt="Ryfylke"><span>Ryfylke</span></div>
+      <div class="map-pin" style="left:42%;top:38%" data-name="Hundvåg"><img src="assets/mostraumen.webp" alt="Hundvåg"><span>Hundvåg</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="featured-outer"><section class="featured-section">
+  <div class="featured-media">
+    <div class="featured-main-img">
+      <img src="assets/lysefjorden.webp" alt="Lysefjorden" id="featured-main-img">
+      <button class="feat-arrow feat-prev" aria-label="Previous photo">&#8249;</button>
+      <button class="feat-arrow feat-next" aria-label="Next photo">&#8250;</button>
+    </div>
+    <div class="featured-thumbs" id="featured-thumbs">
+      <img src="assets/lysefjorden.webp" alt="Lysefjorden" class="feat-thumb active" data-index="0">
+      <img src="assets/preikestolen.webp" alt="Preikestolen" class="feat-thumb" data-index="1">
+      <img src="assets/fjord.webp" alt="Fjord" class="feat-thumb" data-index="2">
+    </div>
+  </div>
+  <div class="featured-info">
+    <div class="featured-top">
+      <h2 class="featured-title">Lysefjorden</h2>
+      <span class="featured-badge">Most popular</span>
+    </div>
+    <div class="featured-location">📍 Stavanger, Norway</div>
+    <p class="featured-desc">Experience the famous Pulpit Rock, stunning waterfalls and dramatic fjord scenery. Perfect for groups, families and special occasions.</p>
+    <div class="featured-meta">
+      <div class="feat-meta-item"><span class="feat-meta-icon">🕐</span><strong>2 hours</strong><small>Duration</small></div>
+      <div class="feat-meta-item"><span class="feat-meta-icon">👥</span><strong>Up to 12</strong><small>People</small></div>
+      <div class="feat-meta-item"><span class="feat-meta-icon">⛵</span><strong>Inflatable boat</strong><small>Activity</small></div>
+      <div class="feat-meta-item"><span class="feat-meta-icon">⭐</span><strong>Amazing views</strong><small>Highlights</small></div>
+    </div>
+    <div class="featured-actions">
+      <a class="glow-button featured-book-btn" href="booking.html?location=lysefjorden">Book This Location →</a>
+      <a class="featured-photos-btn small-button" href="booking.html?location=lysefjorden">📷 See More Photos</a>
+    </div>
+  </div>
+</section>
+</div>
+
+</div>
+
+<section class="gallery-section">
+  <div class="gallery-frame">
+    <div class="gallery" aria-label="Water experience gallery">
+      ${['lounge','rib','yacht','bicycle','taxi'].map((id,i)=>`<button class="gallery-card" data-slide="${i}" aria-label="View ${id} experience"><img src="assets/${id}.webp" alt="${id==='yacht'?'Inflatable water yachts':products.find(p=>p.id===id).name}"></button>`).join('')}
+    </div>
+    <div class="gallery-controls">
+      <button class="prev" aria-label="Previous image">‹</button>
+      ${Array.from({length:5},(_,i)=>`<button class="dot" data-slide="${i}" aria-label="Show image ${i+1}"></button>`).join('')}
+      <span id="slide-count" aria-live="off">3 / 5</span>
+      <button class="next" aria-label="Next image">›</button>
+    </div>
+  </div>
+  <div class="gallery-caption">Everything you need for unforgettable journeys in Norway.</div>
+  <p class="experience-tags">Fjord Cruises <span>•</span> Private Charters <span>•</span> Guided Tours <span>•</span> Nature Experiences <span>•</span> Luxury Travel</p>
+</section>
+
+<section class="home-services" id="experiences">
+  <div class="services-intro">
+    <h2>Rent Premium Water<br>Experiences in Norway</h2>
+    <p>FjordFlyt offers high-quality water bicycles,<br>RIB boats, inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p>
+    <span class="norway-flag" aria-label="Norway">🇳🇴</span>
+  </div>
+  ${[{id:'bicycle',name:'Water Bicycle',image:'bicycle',text:'Explore fjords at your own pace on a fun and eco-friendly water bike.',icon:'🚲'},{id:'rib',name:'Passenger RIB Boat',image:'rib',text:'Experience high-speed adventure with our safe and comfortable RIB boat tours.',icon:'⛵'},{id:'lounge',name:'Inflatable Water Lounge',image:'lounge',text:'Relax and unwind on the water with our spacious inflatable lounge platforms.',icon:'☀'},{id:'lounge',name:'Inflatable Water Yacht',image:'yacht',text:'Indulge in luxury on the water with our exclusive inflatable yacht experience.',icon:'⛵'}].map((p,i)=>`<a class="home-service service-${i}" href="booking.html?experience=${p.id}"><img src="assets/${p.image}.webp" alt="${p.name}" loading="lazy"><div class="home-service-copy"><span class="service-icon" aria-hidden="true">${p.icon}</span><h3>${p.name}</h3><p>${p.text}</p></div></a>`).join('')}
+</section>
+`;
 let slide=0;const cards=[...document.querySelectorAll('.gallery-card')],dots=[...document.querySelectorAll('.dot')];function showSlide(i){slide=(i+cards.length)%cards.length;cards.forEach((c,j)=>{let offset=(j-slide+cards.length)%cards.length;if(offset>2)offset-=cards.length;c.style.transform=`translateX(calc(-50% + ${offset*57}%)) translateZ(${-Math.abs(offset)*180}px) rotateY(${-offset*12}deg)`;c.style.opacity=Math.abs(offset)>1?'.35':'1';c.style.zIndex=5-Math.abs(offset);c.setAttribute('tabindex',offset===0?'0':'-1')});dots.forEach((d,j)=>{d.classList.toggle('active',j===slide);d.setAttribute('aria-pressed',j===slide)});document.querySelector('#slide-count').textContent=`${slide+1} / ${cards.length}`}showSlide(2);document.querySelectorAll('[data-slide]').forEach(b=>b.onclick=()=>showSlide(+b.dataset.slide));document.querySelector('.prev').onclick=()=>showSlide(slide-1);document.querySelector('.next').onclick=()=>showSlide(slide+1);let paused=false;document.querySelector('.gallery-frame').onmouseenter=()=>paused=true;document.querySelector('.gallery-frame').onmouseleave=()=>paused=false;document.querySelector('.gallery-frame').onfocusin=()=>paused=true;document.querySelector('.gallery-frame').onfocusout=()=>paused=false;if(!reduced)setInterval(()=>{if(!paused&&!document.hidden&&!document.documentElement.classList.contains('motion-paused'))showSlide(slide+1)},4500);
+// Destination carousel scroll
+const destCarousel=document.querySelector('#dest-carousel');
+if(destCarousel){
+  document.querySelector('.dest-prev').onclick=()=>destCarousel.scrollBy({left:-260,behavior:'smooth'});
+  document.querySelector('.dest-next').onclick=()=>destCarousel.scrollBy({left:260,behavior:'smooth'});
+}
+// Featured location photo switcher
+const featImgs=['assets/lysefjorden.webp','assets/preikestolen.webp','assets/fjord.webp'];
+let featIdx=0;
+function setFeatPhoto(i){
+  featIdx=(i+featImgs.length)%featImgs.length;
+  const main=document.querySelector('#featured-main-img');
+  if(main){main.style.opacity='0';setTimeout(()=>{main.src=featImgs[featIdx];main.style.opacity='1'},200);}
+  document.querySelectorAll('.feat-thumb').forEach((t,j)=>t.classList.toggle('active',j===featIdx));
+}
+document.querySelectorAll('.feat-thumb').forEach(t=>t.onclick=()=>setFeatPhoto(+t.dataset.index));
+const featPrev=document.querySelector('.feat-prev');const featNext=document.querySelector('.feat-next');
+if(featPrev)featPrev.onclick=()=>setFeatPhoto(featIdx-1);
+if(featNext)featNext.onclick=()=>setFeatPhoto(featIdx+1);
 }else{
 document.title='Book Your Water Experience — Fjordflyt';document.body.className='booking-page';let selected=new Set([new URLSearchParams(location.search).get('experience')||'rib']);selected=new Set([...selected].filter(id=>products.some(p=>p.id===id)));const quantities={rib:2,bicycle:1,lounge:2,taxi:1};let stage=1;let details={name:'',email:'',phone:''};const params=new URLSearchParams(location.search);let date=params.get('date')||'',time='10:00',departure=params.get('location')==='Bergen'?'Bergen':'Stavanger';const now=new Date();const today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;if(date<today)date='';const subtotal=p=>p.price*quantities[p.id]/p.step;const total=()=>products.filter(p=>selected.has(p.id)).reduce((v,p)=>v+subtotal(p),0);const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(){app.innerHTML=`<section class="booking-hero"><a href="./" class="back">Back to home</a><h1>${stage===1?'Choose Your Water Experience':stage===2?'Make it<br><span>your adventure.</span>':'Your adventure,<br><span>at a glance.</span>'}</h1><p>Select the experience you want to rent, choose your date and time,<br>and we’ll take care of the rest.</p><div class="steps">${['Choose experience','Date & time','Your details','Payment'].map((s,i)=>`<span class="${(stage===1?0:stage===2?2:3)===i?'current':''}"><b>${i+1}</b>${s}</span>`).join('')}</div></section><div class="booking-layout"><section class="panel" id="booking-content">${stage===1?`<h2>1. Choose your experience</h2><div class="booking-products">${products.map(p=>`<article class="book-card ${selected.has(p.id)?'selected':''}"><button class="select-product" data-product="${p.id}" aria-pressed="${selected.has(p.id)}" aria-label="Select ${p.name}"><img src="assets/${p.id}.webp" alt="${p.name}"><span class="check">${selected.has(p.id)?'✓':''}</span><div class="card-copy"><h3>${p.short}</h3><p>${p.description}</p><span class="price">${money(p.price)} <small>/ ${p.unit.replace('per ','')}</small></span></div></button><div style="padding:0 18px 18px"><small>${p.label}</small><div class="counter"><button data-change="-${p.step}" data-id="${p.id}" aria-label="Decrease ${p.short} ${p.label.toLowerCase()}">−</button><output>${quantities[p.id]} ${p.label.toLowerCase()}</output><button data-change="${p.step}" data-id="${p.id}" aria-label="Increase ${p.short} ${p.label.toLowerCase()}">+</button></div></div></article>`).join('')}</div>`:stage===2?`<h2>3. Your details</h2><form id="details-form"><div class="details-grid"><label class="field wide">Full name<input name="name" autocomplete="name" required value="${escape(details.name)}"></label><label class="field">Email address<input name="email" type="email" autocomplete="email" required value="${escape(details.email)}"></label><label class="field">Phone (optional)<input name="phone" type="tel" autocomplete="tel" value="${escape(details.phone)}"></label></div><p class="hint">Your details stay in this page during the preview. No reservation has been made.</p><div class="details-action"><button class="glow-button" type="submit">Review your experience</button><button class="text-button" type="button" id="back">Back</button></div></form>`:`<h2>4. Review & payment</h2><div class="review-block"><div class="eyebrow">Date & time</div><p>${escape(departure)} · ${escape(date)} at ${escape(time)}</p></div><div class="review-block"><div class="eyebrow">Your details</div><p>${escape(details.name)}<br>${escape(details.email)}${details.phone?'<br>'+escape(details.phone):''}</p></div><div class="review-block">${products.filter(p=>selected.has(p.id)).map(p=>`<p>${p.short} · ${quantities[p.id]} ${p.label.toLowerCase()} · ${money(subtotal(p))}</p>`).join('')}</div><p class="notice">Your experience is ready to review. Online reservations and payments are not available yet. This preview does not confirm availability, reserve a boat, or charge you.</p><div class="details-action"><button class="small-button" id="download">Download your plan</button><button class="text-button" id="back">Edit details</button></div>`}</section><aside class="panel summary"><h2>${stage===1?'2. Date & time':'Your experience'}</h2>${stage===1?`<label class="field">Departure location<select id="departure"><option ${departure==='Stavanger'?'selected':''}>Stavanger</option><option ${departure==='Bergen'?'selected':''}>Bergen</option></select></label><label class="field">Date<input id="date" type="date" min="${today}" value="${date}" required></label><label class="field">Departure time<select id="time">${['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'].map(t=>`<option ${time===t?'selected':''}>${t}</option>`).join('')}</select></label>`:''}${stage===1?`<div class="summary-people"><h2>3. Number of people</h2><span>Total people</span><div class="counter"><button data-change="-1" data-id="rib" aria-label="Decrease RIB passengers">−</button><output>${quantities.rib}</output><button data-change="1" data-id="rib" aria-label="Increase RIB passengers">+</button></div><p class="hint">For RIB Boat pricing · Up to 10 people</p></div>`:''}<div class="summary-lines"><h2>Order Summary</h2>${selected.size?products.filter(p=>selected.has(p.id)).map(p=>`<div class="summary-item"><img src="assets/${p.id}.webp" alt=""><div>${p.short}<small>${quantities[p.id]} ${p.label.toLowerCase()}</small></div><strong>${money(subtotal(p))}</strong></div>`).join(''):'<p>Select an experience to begin.</p>'}</div><div class="total"><span>Total</span><strong>${money(total())}</strong></div>${stage===1?'<button class="glow-button" id="continue">Continue to details</button><p id="error" class="error" role="alert"></p>':''}<p class="hint">Prices are based on the supplied experience guide. Availability and final booking terms require confirmation.</p></aside></div>`;
