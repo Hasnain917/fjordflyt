@@ -1908,5 +1908,318 @@ html.theme-dark .adv-field input { background: #111827; color: #f8fafc; border-c
   contain-intrinsic-size: 550px;
 }
 
+/* ============================================================
+   BOOKING PAGE — THEME STYLING (Light Mode Default)
+   Matches website theme with full animation & dark mode support
+   ============================================================ */
+html:not(.theme-dark) body.booking-page {
+  background: linear-gradient(180deg, #f8fafc 0%, #f0f7ff 35%, #edf6fd 70%, #f8fafc 100%);
+  color: #0f1e33;
+}
 
+html:not(.theme-dark) .booking-page header a:not(.small-button) {
+  color: #334155;
+}
 
+html:not(.theme-dark) .booking-page header a[aria-current=page] {
+  color: #0284c7;
+  border-bottom: 2px solid #0284c7;
+}
+
+html:not(.theme-dark) .booking-page header a:hover {
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-page .brand img {
+  filter: invert(1) brightness(0.2);
+}
+
+html:not(.theme-dark) .booking-page .header-language {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .theme-toggle {
+  background: rgba(15, 23, 42, 0.06);
+  border-color: #cbd5e1;
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page #menu {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page #reference-motion {
+  opacity: 0.25;
+  mix-blend-mode: screen;
+}
+
+/* Booking Hero Light */
+html:not(.theme-dark) .booking-hero .back {
+  color: #0284c7;
+  font-weight: 600;
+}
+
+html:not(.theme-dark) .booking-hero .back:hover {
+  color: #0369a1;
+}
+
+html:not(.theme-dark) .booking-hero h1 {
+  color: #0f1e33;
+  font-weight: 800;
+}
+
+html:not(.theme-dark) .booking-hero h1 span {
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-hero p {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .steps {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .steps span b {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+}
+
+html:not(.theme-dark) .booking-page .steps span.current {
+  color: #0f1e33;
+  font-weight: 700;
+}
+
+html:not(.theme-dark) .booking-page .steps span.current b {
+  border-color: #0284c7;
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+}
+
+html:not(.theme-dark) .booking-page .steps span:not(:last-child):after {
+  background: #cbd5e1;
+}
+
+/* Booking Layout & Glass Panel Light */
+html:not(.theme-dark) .booking-page .booking-layout {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08), 0 0 30px rgba(56, 189, 248, 0.12);
+}
+
+html:not(.theme-dark) .booking-page .booking-layout > .summary {
+  border-left: 1.5px solid #e2e8f0;
+}
+
+html:not(.theme-dark) .booking-page .panel h2 {
+  color: #0f1e33;
+  font-weight: 800;
+}
+
+/* Product Cards in Light */
+html:not(.theme-dark) .booking-page .book-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+
+html:not(.theme-dark) .booking-page .book-card.selected {
+  border-color: #0284c7;
+  box-shadow: 0 10px 28px rgba(2, 132, 199, 0.22);
+}
+
+html:not(.theme-dark) .booking-page .card-copy h3 {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .card-copy p {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .card-copy .price {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+html:not(.theme-dark) .booking-page .card-copy .price small {
+  color: #94a3b8;
+}
+
+html:not(.theme-dark) .booking-page .check {
+  border-color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.06);
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .selected .check {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+/* Counters */
+html:not(.theme-dark) .booking-page .counter {
+  border: 1.5px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+html:not(.theme-dark) .booking-page .counter button {
+  color: #0284c7;
+  font-weight: 700;
+}
+
+html:not(.theme-dark) .booking-page .counter button:hover {
+  background: rgba(2, 132, 199, 0.1);
+}
+
+html:not(.theme-dark) .booking-page .counter output {
+  color: #0f1e33;
+  font-weight: 700;
+}
+
+html:not(.theme-dark) .booking-page .booking-products small,
+html:not(.theme-dark) .booking-page .summary-people > span {
+  color: #64748b;
+}
+
+/* Summary Panel & Form Fields */
+html:not(.theme-dark) .booking-page .field {
+  color: #475569;
+  font-weight: 600;
+}
+
+html:not(.theme-dark) .booking-page .field input,
+html:not(.theme-dark) .booking-page .field select {
+  background: #ffffff;
+  color: #0f1e33;
+  border: 1.5px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+html:not(.theme-dark) .booking-page .field input:focus,
+html:not(.theme-dark) .booking-page .field select:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.18);
+}
+
+html:not(.theme-dark) .booking-page .field select option {
+  background: #ffffff;
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .summary-people {
+  border-top: 1.5px solid #e2e8f0;
+}
+
+html:not(.theme-dark) .booking-page .summary-people h2 {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .summary-lines {
+  border-color: #e2e8f0;
+}
+
+html:not(.theme-dark) .booking-page .summary-lines h2 {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .summary-item strong {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .summary-item small {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .summary-item img {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+html:not(.theme-dark) .booking-page .total {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .total strong {
+  color: #0284c7;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+html:not(.theme-dark) .booking-page .hint {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .review-block {
+  border-color: #e2e8f0;
+}
+
+html:not(.theme-dark) .booking-page .review-block .eyebrow {
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-page .review-block p {
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .notice {
+  background: #f0f9ff;
+  border: 1.5px solid #bae6fd;
+  color: #0369a1;
+}
+
+html:not(.theme-dark) .booking-page .text-button {
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .text-button:hover {
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-page .small-button {
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f1e33;
+}
+
+html:not(.theme-dark) .booking-page .small-button:hover {
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-page footer {
+  border-top: 1.5px solid #e2e8f0;
+  color: #64748b;
+}
+
+html:not(.theme-dark) .booking-page .footer-brand img {
+  filter: invert(1) brightness(0.2);
+}
+
+html:not(.theme-dark) .booking-page footer a {
+  color: #0284c7;
+}
+
+html:not(.theme-dark) .booking-page footer a:hover {
+  color: #0369a1;
+}
+
+@media (max-width: 800px) {
+  html:not(.theme-dark) .booking-page .booking-layout > .summary {
+    border-left: 0;
+    border-top: 1.5px solid #e2e8f0;
+  }
+}
+
+/* Explicit Dark Theme for Booking Page when toggled */
+html.theme-dark body.booking-page {
+  background: #08090c;
+  color: #f5f6fa;
+}
+
+html.theme-dark .booking-page .brand img,
+html.theme-dark .booking-page .footer-brand img {
+  filter: none;
+}
