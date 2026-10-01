@@ -71,6 +71,11 @@ app.innerHTML=`
 </section>
 
 <div class="light-sections-wrapper">
+  <div class="glass-ambient-layer" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
 
 <section class="trust-bar" aria-label="Key benefits">
   <div class="trust-bar-inner">
@@ -104,24 +109,30 @@ app.innerHTML=`
       <h2>Choose Your Location</h2>
       <p>We have multiple locations around Stavanger and nearby fjords.<br>Each location offers unique views, islands and activities.</p>
     </div>
-    <a class="dest-view-all" href="booking.html">View all locations →</a>
+    <div class="dest-heading-right">
+      <a class="dest-view-all" href="booking.html">View all locations →</a>
+      <div class="dest-nav-buttons">
+        <button class="dest-arrow dest-prev" aria-label="Previous destination">&#8249;</button>
+        <button class="dest-arrow dest-next" aria-label="Next destination">&#8250;</button>
+      </div>
+    </div>
   </div>
   <div class="dest-carousel-wrap">
-    <button class="dest-arrow dest-prev" aria-label="Previous destination">&#8249;</button>
     <div class="dest-carousel" id="dest-carousel">
       ${destinations.map((d,i)=>`
       <a class="dest-card" href="booking.html?location=${d.id}">
-        <img src="${d.img}" alt="${d.name}" loading="lazy">
+        <div class="dest-card-media">
+          <img src="${d.img}" alt="${d.name}" loading="lazy">
+        </div>
         <div class="dest-card-footer">
           <div>
             <div class="dest-card-name">${d.name}</div>
             <div class="dest-card-tags">${d.tags}</div>
           </div>
-          <button class="dest-card-arrow" aria-label="View ${d.name}" tabindex="-1">›</button>
+          <span class="dest-card-arrow" aria-label="View ${d.name}">›</span>
         </div>
       </a>`).join('')}
     </div>
-    <button class="dest-arrow dest-next" aria-label="Next destination">&#8250;</button>
   </div>
 </section>
 
