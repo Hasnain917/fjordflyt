@@ -2217,26 +2217,27 @@ html:not(.theme-dark) .booking-page .booking-layout .small-button:hover {
 }
 
 /* ============================================================
-   FOOTER CTA & FOOTER ON BOOKING PAGE
+   FOOTER CTA WRAPPER & FOOTER ON BOOKING PAGE
    Completely Dark edge-to-edge, exactly like Home & Insurance pages
    ============================================================ */
+.footer-cta-wrapper {
+  width: 100%;
+  background: #080a0b;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.booking-page .footer-cta-wrapper {
+  background: #080a0b;
+  width: 100%;
+  overflow: hidden;
+}
+
 .booking-page .footer-cta {
   background: #080a0b;
   position: relative;
   isolation: isolate;
-}
-
-.booking-page .footer-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  background: #080a0b;
-  z-index: -2;
-  pointer-events: none;
 }
 
 .booking-page .footer-cta .small-button {
@@ -2253,23 +2254,21 @@ html:not(.theme-dark) .booking-page .booking-layout .small-button:hover {
 
 .booking-page footer {
   background: #08090c;
-  position: relative;
-  isolation: isolate;
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 35px calc((100% - 1140px) / 2) 45px !important;
+  box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   color: #8e97a9 !important;
+  position: relative;
+  isolation: isolate;
 }
 
-.booking-page footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  background: #08090c;
-  z-index: -1;
-  pointer-events: none;
+@media (max-width: 1200px) {
+  .booking-page footer {
+    padding: 35px 5% 45px !important;
+  }
 }
 
 .booking-page .footer-brand img {
