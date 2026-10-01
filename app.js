@@ -1,7 +1,180 @@
 const products=[{id:'rib',name:'Passenger RIB Boat',short:'RIB Boat',description:'High-speed adventure on the water with a professional skipper.',price:1000,unit:'per person',label:'People',step:1},{id:'bicycle',name:'Water Bicycle',short:'Water Bicycle',description:'Explore at your own pace on a fun, eco-friendly water bike.',price:300,unit:'per hour',label:'Hours',step:1},{id:'lounge',name:'Inflatable Water Lounge',short:'Inflatable Yacht',description:'Relax and unwind on a spacious floating lounge with family and friends.',price:2000,unit:'per 2 hours',label:'Hours',step:2},{id:'taxi',name:'Private Taxi Boat',short:'Taxi Boat',description:'Private transport on the water with a skipper.',price:5000,unit:'per hour',label:'Hours',step:1}];
-const app=document.querySelector('#app');const booking=document.body.dataset.page==='booking'||/\/booking(?:\.html)?\/?$/.test(location.pathname);const money=v=>'NOK '+v.toLocaleString('en-US');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const app=document.querySelector('#app');const booking=document.body.dataset.page==='booking'||/\/booking(?:\.html)?\/?$/.test(location.pathname);const isInsurance=document.body.dataset.page==='insurance'||document.body.dataset.page==='locations'||/\/(?:insurance|locations)(?:\.html)?\/?$/.test(location.pathname);const money=v=>'NOK '+v.toLocaleString('en-US');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.querySelector('#year').textContent=new Date().getFullYear();document.querySelector('#menu').onclick=e=>{const open=document.querySelector('nav').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)};
-if(!booking){
+if(isInsurance){
+  document.title='Insurance & Locations — Fjordflyt';
+  document.body.className='insurance-page';
+  const locList=[
+    {num:'01',id:'Lysefjorden',name:'Lysefjorden',img:'assets/lysefjorden.webp',tag:'FJORDS & WATERFALLS',desc:'Dramatic cliffs, cascading waterfalls and the famous Pulpit Rock. Discover an unforgettable view of Norway from the water.',category:'fjords'},
+    {num:'02',id:'Idse',name:'Idse',img:'assets/idse.webp',tag:'ISLANDS & CALM SHORES',desc:'A slower pace, sheltered shores and island scenery. Find a peaceful setting for a relaxed day with your favourite people.',category:'islands'},
+    {num:'03',id:'Ryfylke',name:'Ryfylke',img:'assets/ryfylke.webp',tag:'MOUNTAINS & OPEN WATER',desc:'Explore a landscape of deep fjords and green mountain slopes. A beautiful backdrop for time away from the everyday.',category:'fjords'},
+    {num:'04',id:'Hidlefjorden',name:'Hidlefjorden',img:'assets/hidlefjorden.webp',tag:'ISLAND HOPPING & RELAXATION',desc:'Discover inviting island scenery and open water. Bring your friends and find a new perspective on the coast.',category:'islands'},
+    {num:'05',id:'Hundvåg',name:'Hundvåg',img:'assets/hundvag.webp',tag:'COAST & COASTAL LIFE',desc:'Stay close to Stavanger and discover its coastal surroundings. Make space for a little adventure on your next day out.',category:'islands'}
+  ];
+
+  app.innerHTML=`
+  <section class="insurance-hero">
+    <div class="insurance-hero-copy">
+      <div class="insurance-eyebrow">FIND YOUR CORNER OF NORWAY</div>
+      <h1>Extraordinary places.<br><span>Unforgettable water.</span></h1>
+      <p>From dramatic fjords to quiet island shores. Choose the backdrop for your next adventure.</p>
+      <a class="glow-button insurance-cta-btn" href="#destinations-grid">Explore locations</a>
+    </div>
+    <div class="insurance-hero-media">
+      <div class="insurance-hero-frame">
+        <img src="assets/locations-hero.webp" alt="Stavanger & the surrounding fjords" loading="eager">
+        <div class="insurance-hero-caption">📍 Stavanger &amp; the surrounding fjords</div>
+      </div>
+      <div class="insurance-orbit-lines" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="light-sections-wrapper">
+    <div class="glass-ambient-layer" aria-hidden="true">
+      <div class="ambient-orb ambient-orb-1"></div>
+      <div class="ambient-orb ambient-orb-2"></div>
+      <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <section class="insurance-dest-section" id="destinations-grid">
+      <div class="insurance-dest-header">
+        <div class="dest-badge">OUR DESTINATIONS</div>
+        <h2>Find the place that moves you.</h2>
+        <p>Big views, little islands and a different kind of day out.</p>
+        <div class="loc-filter-tabs">
+          <button class="loc-filter-tab active" data-category="all">All locations</button>
+          <button class="loc-filter-tab" data-category="fjords">Fjord adventures</button>
+          <button class="loc-filter-tab" data-category="islands">Island escapes</button>
+        </div>
+      </div>
+
+      <div class="insurance-cards-grid">
+        ${locList.map((item, idx)=>`
+        <article class="loc-dest-card" data-category="${item.category}" style="--neon-delay: ${idx * -1.3}s">
+          <div class="loc-card-media">
+            <span class="loc-card-num">${item.num}</span>
+            <img src="${item.img}" alt="${item.name}" loading="lazy">
+          </div>
+          <div class="loc-card-body">
+            <span class="loc-card-tag">${item.tag}</span>
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <a class="card-action-link" href="booking.html?location=${encodeURIComponent(item.id)}">Explore location →</a>
+          </div>
+        </article>
+        `).join('')}
+      </div>
+    </section>
+
+    <section class="insurance-benefits-bar" aria-label="Key highlights">
+      <div class="benefits-inner">
+        <div class="benefits-header">
+          <span class="benefits-eyebrow">A LITTLE CLOSER TO AN EXTRAORDINARY DAY</span>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            </div>
+            <h4>Places worth exploring</h4>
+            <p>Discover fjord scenery and island shores around Stavanger.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h4>Your kind of pace</h4>
+            <p>Choose an active adventure or a slower moment on the water.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="10" y1="3" y2="21"/><line x1="14" x2="14" y1="3" y2="21"/></svg>
+            </div>
+            <h4>More ways to explore</h4>
+            <p>Discover water bicycles, RIB boats and floating lounges.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h4>A simple starting point</h4>
+            <p>Choose an experience, set your date and review your plan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="adventure-split-section">
+      <div class="adventure-banner-card">
+        <div class="adventure-banner-copy">
+          <div class="banner-eyebrow">YOUR NEXT GREAT MOMENT</div>
+          <h2>Less ordinary.<br><em>More Norway.</em></h2>
+          <p>A new view is waiting just beyond the shore.</p>
+        </div>
+      </div>
+      <div class="adventure-form-card">
+        <div class="form-eyebrow">MAKE IT YOURS</div>
+        <h2>Start your adventure</h2>
+        <form id="adv-booking-form">
+          <div class="adv-field">
+            <label for="adv-location">Where would you like to go?</label>
+            <select id="adv-location">
+              <option value="Lysefjorden">Lysefjorden</option>
+              <option value="Idse">Idse</option>
+              <option value="Ryfylke">Ryfylke</option>
+              <option value="Hidlefjorden">Hidlefjorden</option>
+              <option value="Hundvåg">Hundvåg</option>
+            </select>
+          </div>
+          <div class="adv-field">
+            <label for="adv-experience">Your experience</label>
+            <select id="adv-experience">
+              <option value="lounge">Inflatable Water Lounge</option>
+              <option value="rib">Passenger RIB Boat</option>
+              <option value="bicycle">Water Bicycle</option>
+              <option value="taxi">Private Taxi Boat</option>
+            </select>
+          </div>
+          <div class="adv-field">
+            <label for="adv-date">Preferred date</label>
+            <input type="date" id="adv-date">
+          </div>
+          <button type="submit" class="adv-submit-btn" id="adv-submit">Continue to booking</button>
+          <p class="adv-microcopy">Explore your options. Availability is confirmed separately.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+  `;
+
+  // Filter tabs logic
+  document.querySelectorAll('.loc-filter-tab').forEach(tab=>{
+    tab.onclick=()=>{
+      document.querySelectorAll('.loc-filter-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat=tab.dataset.category;
+      document.querySelectorAll('.loc-dest-card').forEach(card=>{
+        if(cat==='all'||card.dataset.category===cat){
+          card.style.display='flex';
+        }else{
+          card.style.display='none';
+        }
+      });
+    };
+  });
+
+  // Split form submission
+  const advForm=document.querySelector('#adv-booking-form');
+  if(advForm){
+    advForm.onsubmit=(e)=>{
+      e.preventDefault();
+      const loc=document.querySelector('#adv-location')?.value||'Lysefjorden';
+      const exp=document.querySelector('#adv-experience')?.value||'lounge';
+      const dt=document.querySelector('#adv-date')?.value||'';
+      location.href=`booking.html?location=${encodeURIComponent(loc)}&experience=${encodeURIComponent(exp)}${dt?'&date='+encodeURIComponent(dt):''}`;
+    };
+  }
+}else if(!booking){
 const destinations=[
   {id:'lysefjorden',name:'Lysefjorden',img:'assets/lysefjorden.webp',tags:'Waterfalls · Pulpit Rock · Stunning fjord scenery'},
   {id:'idse',name:'Idse',img:'assets/idse.webp',tags:'Beaches · Islands · Calm waters'},
