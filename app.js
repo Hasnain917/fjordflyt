@@ -32,24 +32,68 @@ app.innerHTML=`
   <p class="experience-tags">Fjord Cruises <span>•</span> Private Charters <span>•</span> Guided Tours <span>•</span> Nature Experiences <span>•</span> Luxury Travel</p>
 </section>
 
-<section class="home-services" id="experiences">
-  <div class="services-intro">
-    <h2>Rent Premium Water<br>Experiences in Norway</h2>
-    <p>FjordFlyt offers high-quality water bicycles,<br>RIB boats, inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p>
-    <span class="norway-flag" aria-label="Norway">🇳🇴</span>
+<section class="hero-search-wrap">
+  <div class="hero-search-bar">
+    <div class="search-field">
+      <span class="search-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <div class="search-text">
+        <span class="search-label">Select location</span>
+        <select class="search-input" id="hero-location">
+          <option value="Stavanger">Stavanger</option>
+          <option value="Lysefjorden">Lysefjorden</option>
+          <option value="Idse">Idse</option>
+          <option value="Hundvåg">Hundvåg</option>
+          <option value="Ryfylke">Ryfylke</option>
+        </select>
+      </div>
+    </div>
+    <div class="search-field">
+      <span class="search-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
+      <div class="search-text">
+        <span class="search-label">Select date</span>
+        <input type="date" class="search-input" id="hero-date">
+      </div>
+    </div>
+    <div class="search-field">
+      <span class="search-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/></svg></span>
+      <div class="search-text">
+        <span class="search-label">Select activity</span>
+        <select class="search-input" id="hero-activity">
+          <option value="rib">Inflatable Boat</option>
+          <option value="lounge">Inflatable Lounge</option>
+          <option value="yacht">Inflatable Yacht</option>
+          <option value="bicycle">Water Bicycle</option>
+        </select>
+      </div>
+    </div>
+    <button class="glow-button search-btn" id="hero-search-btn">Check Availability →</button>
   </div>
-  ${[{id:'bicycle',name:'Water Bicycle',image:'bicycle',text:'Explore fjords at your own pace on a fun and eco-friendly water bike.',icon:'🚲'},{id:'rib',name:'Passenger RIB Boat',image:'rib',text:'Experience high-speed adventure with our safe and comfortable RIB boat tours.',icon:'⛵'},{id:'lounge',name:'Inflatable Water Lounge',image:'lounge',text:'Relax and unwind on the water with our spacious inflatable lounge platforms.',icon:'☀'},{id:'lounge',name:'Inflatable Water Yacht',image:'yacht',text:'Indulge in luxury on the water with our exclusive inflatable yacht experience.',icon:'⛵'}].map((p,i)=>`<a class="home-service service-${i}" href="booking.html?experience=${p.id}"><img src="assets/${p.image}.webp" alt="${p.name}" loading="lazy"><div class="home-service-copy"><span class="service-icon" aria-hidden="true">${p.icon}</span><h3>${p.name}</h3><p>${p.text}</p></div></a>`).join('')}
 </section>
 
 <div class="light-sections-wrapper">
 
 <section class="trust-bar" aria-label="Key benefits">
   <div class="trust-bar-inner">
-    <div class="trust-item"><div class="trust-icon">📅</div><div><strong>Flexible booking</strong><p>Free change or cancel up to 24 hours</p></div></div>
-    <div class="trust-item"><div class="trust-icon">⛅</div><div><strong>Weather guarantee</strong><p>Reschedule if unsafe weather</p></div></div>
-    <div class="trust-item"><div class="trust-icon">💳</div><div><strong>Secure payment</strong><p>Pay online with trusted partner</p></div></div>
-    <div class="trust-item"><div class="trust-icon">🎧</div><div><strong>Local support</strong><p>We are here to help you</p></div></div>
-    <div class="trust-item"><div class="trust-icon">👨‍👩‍👧</div><div><strong>Family friendly</strong><p>Perfect for groups, families and friends</p></div></div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div><strong>Flexible booking</strong><p>Free change or cancel up to 24 hours</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/></svg></div>
+      <div><strong>Weather guarantee</strong><p>Reschedule if unsafe weather</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>
+      <div><strong>Secure payment</strong><p>Pay online with trusted partner</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+      <div><strong>Local support</strong><p>We are here to help you</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div><strong>Family friendly</strong><p>Perfect for groups, families and friends</p></div>
+    </div>
   </div>
 </section>
 
@@ -165,6 +209,15 @@ document.querySelectorAll('.feat-thumb').forEach(t=>t.onclick=()=>setFeatPhoto(+
 const featPrev=document.querySelector('.feat-prev');const featNext=document.querySelector('.feat-next');
 if(featPrev)featPrev.onclick=()=>setFeatPhoto(featIdx-1);
 if(featNext)featNext.onclick=()=>setFeatPhoto(featIdx+1);
+const searchBtn=document.querySelector('#hero-search-btn');
+if(searchBtn){
+  searchBtn.onclick=()=>{
+    const loc=document.querySelector('#hero-location')?.value||'Stavanger';
+    const act=document.querySelector('#hero-activity')?.value||'rib';
+    const dt=document.querySelector('#hero-date')?.value||'';
+    location.href=`booking.html?location=${encodeURIComponent(loc)}&experience=${encodeURIComponent(act)}${dt?'&date='+encodeURIComponent(dt):''}`;
+  };
+}
 }else{
 document.title='Book Your Water Experience — Fjordflyt';document.body.className='booking-page';let selected=new Set([new URLSearchParams(location.search).get('experience')||'rib']);selected=new Set([...selected].filter(id=>products.some(p=>p.id===id)));const quantities={rib:2,bicycle:1,lounge:2,taxi:1};let stage=1;let details={name:'',email:'',phone:''};const params=new URLSearchParams(location.search);let date=params.get('date')||'',time='10:00',departure=params.get('location')==='Bergen'?'Bergen':'Stavanger';const now=new Date();const today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;if(date<today)date='';const subtotal=p=>p.price*quantities[p.id]/p.step;const total=()=>products.filter(p=>selected.has(p.id)).reduce((v,p)=>v+subtotal(p),0);const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(){app.innerHTML=`<section class="booking-hero"><a href="./" class="back">Back to home</a><h1>${stage===1?'Choose Your Water Experience':stage===2?'Make it<br><span>your adventure.</span>':'Your adventure,<br><span>at a glance.</span>'}</h1><p>Select the experience you want to rent, choose your date and time,<br>and we’ll take care of the rest.</p><div class="steps">${['Choose experience','Date & time','Your details','Payment'].map((s,i)=>`<span class="${(stage===1?0:stage===2?2:3)===i?'current':''}"><b>${i+1}</b>${s}</span>`).join('')}</div></section><div class="booking-layout"><section class="panel" id="booking-content">${stage===1?`<h2>1. Choose your experience</h2><div class="booking-products">${products.map(p=>`<article class="book-card ${selected.has(p.id)?'selected':''}"><button class="select-product" data-product="${p.id}" aria-pressed="${selected.has(p.id)}" aria-label="Select ${p.name}"><img src="assets/${p.id}.webp" alt="${p.name}"><span class="check">${selected.has(p.id)?'✓':''}</span><div class="card-copy"><h3>${p.short}</h3><p>${p.description}</p><span class="price">${money(p.price)} <small>/ ${p.unit.replace('per ','')}</small></span></div></button><div style="padding:0 18px 18px"><small>${p.label}</small><div class="counter"><button data-change="-${p.step}" data-id="${p.id}" aria-label="Decrease ${p.short} ${p.label.toLowerCase()}">−</button><output>${quantities[p.id]} ${p.label.toLowerCase()}</output><button data-change="${p.step}" data-id="${p.id}" aria-label="Increase ${p.short} ${p.label.toLowerCase()}">+</button></div></div></article>`).join('')}</div>`:stage===2?`<h2>3. Your details</h2><form id="details-form"><div class="details-grid"><label class="field wide">Full name<input name="name" autocomplete="name" required value="${escape(details.name)}"></label><label class="field">Email address<input name="email" type="email" autocomplete="email" required value="${escape(details.email)}"></label><label class="field">Phone (optional)<input name="phone" type="tel" autocomplete="tel" value="${escape(details.phone)}"></label></div><p class="hint">Your details stay in this page during the preview. No reservation has been made.</p><div class="details-action"><button class="glow-button" type="submit">Review your experience</button><button class="text-button" type="button" id="back">Back</button></div></form>`:`<h2>4. Review & payment</h2><div class="review-block"><div class="eyebrow">Date & time</div><p>${escape(departure)} · ${escape(date)} at ${escape(time)}</p></div><div class="review-block"><div class="eyebrow">Your details</div><p>${escape(details.name)}<br>${escape(details.email)}${details.phone?'<br>'+escape(details.phone):''}</p></div><div class="review-block">${products.filter(p=>selected.has(p.id)).map(p=>`<p>${p.short} · ${quantities[p.id]} ${p.label.toLowerCase()} · ${money(subtotal(p))}</p>`).join('')}</div><p class="notice">Your experience is ready to review. Online reservations and payments are not available yet. This preview does not confirm availability, reserve a boat, or charge you.</p><div class="details-action"><button class="small-button" id="download">Download your plan</button><button class="text-button" id="back">Edit details</button></div>`}</section><aside class="panel summary"><h2>${stage===1?'2. Date & time':'Your experience'}</h2>${stage===1?`<label class="field">Departure location<select id="departure"><option ${departure==='Stavanger'?'selected':''}>Stavanger</option><option ${departure==='Bergen'?'selected':''}>Bergen</option></select></label><label class="field">Date<input id="date" type="date" min="${today}" value="${date}" required></label><label class="field">Departure time<select id="time">${['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'].map(t=>`<option ${time===t?'selected':''}>${t}</option>`).join('')}</select></label>`:''}${stage===1?`<div class="summary-people"><h2>3. Number of people</h2><span>Total people</span><div class="counter"><button data-change="-1" data-id="rib" aria-label="Decrease RIB passengers">−</button><output>${quantities.rib}</output><button data-change="1" data-id="rib" aria-label="Increase RIB passengers">+</button></div><p class="hint">For RIB Boat pricing · Up to 10 people</p></div>`:''}<div class="summary-lines"><h2>Order Summary</h2>${selected.size?products.filter(p=>selected.has(p.id)).map(p=>`<div class="summary-item"><img src="assets/${p.id}.webp" alt=""><div>${p.short}<small>${quantities[p.id]} ${p.label.toLowerCase()}</small></div><strong>${money(subtotal(p))}</strong></div>`).join(''):'<p>Select an experience to begin.</p>'}</div><div class="total"><span>Total</span><strong>${money(total())}</strong></div>${stage===1?'<button class="glow-button" id="continue">Continue to details</button><p id="error" class="error" role="alert"></p>':''}<p class="hint">Prices are based on the supplied experience guide. Availability and final booking terms require confirmation.</p></aside></div>`;
