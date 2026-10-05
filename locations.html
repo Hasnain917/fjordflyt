@@ -16,16 +16,21 @@
     </video>
   </div>
   <header>
-    <a class="brand" href="./" aria-label="Fjordflyt home">
-      <img src="assets/fjordflyt-logo.png" alt="Fjordflyt">
-    </a>
-    <nav aria-label="Main navigation">
-      <a href="./">Home</a>
-      <a href="insurance.html" aria-current="page">Insurance</a>
-      <a href="booking.html">Booking</a>
+    <div class="header-left">
+      <a class="brand" href="./" aria-label="Fjordflyt home">
+        <img src="assets/fjordflyt-logo.png" alt="Fjordflyt">
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="./">Home</a>
+        <a href="insurance.html" aria-current="page">Insurance</a>
+        <a href="booking.html">Booking</a>
+      </nav>
+    </div>
+    <div class="header-right">
       <span class="header-language">EN · 🇳🇴</span>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
-    </nav>
+      <a href="booking.html" class="small-button nav-cta">Book now</a>
+    </div>
     <button id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
   </header>
   <main id="app"></main>

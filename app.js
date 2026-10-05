@@ -1,194 +1,302 @@
 const products=[{id:'rib',name:'Passenger RIB Boat',short:'RIB Boat',description:'High-speed adventure on the water with a professional skipper.',price:1000,unit:'per person',label:'People',step:1},{id:'bicycle',name:'Water Bicycle',short:'Water Bicycle',description:'Explore at your own pace on a fun, eco-friendly water bike.',price:300,unit:'per hour',label:'Hours',step:1},{id:'lounge',name:'Inflatable Water Lounge',short:'Inflatable Yacht',description:'Relax and unwind on a spacious floating lounge with family and friends.',price:2000,unit:'per 2 hours',label:'Hours',step:2},{id:'taxi',name:'Private Taxi Boat',short:'Taxi Boat',description:'Private transport on the water with a skipper.',price:5000,unit:'per hour',label:'Hours',step:1}];
 const app=document.querySelector('#app');const booking=document.body.dataset.page==='booking'||/\/booking(?:\.html)?\/?$/.test(location.pathname);const isInsurance=document.body.dataset.page==='insurance'||document.body.dataset.page==='locations'||/\/(?:insurance|locations)(?:\.html)?\/?$/.test(location.pathname);const money=v=>'NOK '+v.toLocaleString('en-US');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelector('#year').textContent=new Date().getFullYear();document.querySelector('#menu').onclick=e=>{const open=document.querySelector('nav').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)};
+document.querySelector('#year').textContent=new Date().getFullYear();document.querySelector('#menu').onclick=e=>{const navEl=document.querySelector('.nav-links')||document.querySelector('nav');const open=navEl.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)};
 if(isInsurance){
-  document.title='Insurance & Locations — Fjordflyt';
-  document.body.className='insurance-page';
-  const locList=[
-    {num:'01',id:'Lysefjorden',name:'Lysefjorden',img:'assets/lysefjorden.webp',tag:'FJORDS & WATERFALLS',desc:'Dramatic cliffs, cascading waterfalls and the famous Pulpit Rock. Discover an unforgettable view of Norway from the water.',category:'fjords'},
-    {num:'02',id:'Idse',name:'Idse',img:'assets/idse.webp',tag:'ISLANDS & CALM SHORES',desc:'A slower pace, sheltered shores and island scenery. Find a peaceful setting for a relaxed day with your favourite people.',category:'islands'},
-    {num:'03',id:'Ryfylke',name:'Ryfylke',img:'assets/ryfylke.webp',tag:'MOUNTAINS & OPEN WATER',desc:'Explore a landscape of deep fjords and green mountain slopes. A beautiful backdrop for time away from the everyday.',category:'fjords'},
-    {num:'04',id:'Hidlefjorden',name:'Hidlefjorden',img:'assets/hidlefjorden.webp',tag:'ISLAND HOPPING & RELAXATION',desc:'Discover inviting island scenery and open water. Bring your friends and find a new perspective on the coast.',category:'islands'},
-    {num:'05',id:'Hundvåg',name:'Hundvåg',img:'assets/hundvag.webp',tag:'COAST & COASTAL LIFE',desc:'Stay close to Stavanger and discover its coastal surroundings. Make space for a little adventure on your next day out.',category:'islands'}
-  ];
+  document.title = 'Our Insurance Products — Comprehensive Coverage for What Matters Most';
+  document.body.className = 'insurance-page';
 
-  app.innerHTML=`
-  <div class="insurance-hero-wrap">
-    <section class="insurance-hero">
-      <div class="insurance-hero-copy">
-        <div class="insurance-eyebrow">FIND YOUR CORNER OF NORWAY</div>
-        <h1>Extraordinary places.<br><span>Unforgettable water.</span></h1>
-        <p>From dramatic fjords to quiet island shores. Choose the backdrop for your next adventure.</p>
-        <a class="glow-button insurance-cta-btn" href="#destinations-grid">Explore locations</a>
-      </div>
-      <div class="insurance-hero-media">
-        <div class="insurance-hero-frame">
-          <img src="assets/locations-hero.webp" alt="Stavanger & the surrounding fjords" loading="eager">
-          <div class="insurance-hero-caption">📍 Stavanger &amp; the surrounding fjords</div>
-        </div>
-        <div class="insurance-orbit-lines" aria-hidden="true"></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="light-sections-wrapper">
-    <div class="glass-ambient-layer" aria-hidden="true">
-      <div class="ambient-orb ambient-orb-1"></div>
-      <div class="ambient-orb ambient-orb-2"></div>
-      <div class="ambient-orb ambient-orb-3"></div>
-    </div>
-
-    <section class="insurance-dest-section" id="destinations-grid">
-      <div class="insurance-dest-header">
-        <div class="dest-badge">OUR DESTINATIONS</div>
-        <h2>Find the place that moves you.</h2>
-        <p>Big views, little islands and a different kind of day out.</p>
-        <div class="loc-filter-tabs">
-          <button class="loc-filter-tab active" data-category="all">All locations</button>
-          <button class="loc-filter-tab" data-category="fjords">Fjord adventures</button>
-          <button class="loc-filter-tab" data-category="islands">Island escapes</button>
-        </div>
+  app.innerHTML = `
+  <div class="insurance-page-content">
+    <!-- SECTION 1: OUR INSURANCE PRODUCTS -->
+    <section class="insurance-products-section" aria-label="Our Insurance Products">
+      <div class="insurance-products-header">
+        <span class="ins-eyebrow">OUR INSURANCE PRODUCTS</span>
+        <h1 class="ins-main-heading">Comprehensive Coverage for What Matters Most</h1>
+        <div class="ins-heading-bar" aria-hidden="true"></div>
+        <p class="ins-sub-desc">Personalized policies crafted to safeguard your vehicles, enterprises, and property with complete confidence and rapid claims support.</p>
       </div>
 
-      <div class="insurance-cards-grid">
-        ${locList.map((item, idx)=>`
-        <article class="loc-dest-card" data-category="${item.category}" style="--neon-delay: ${idx * -1.3}s">
-          <div class="loc-card-media">
-            <span class="loc-card-num">${item.num}</span>
-            <img src="${item.img}" alt="${item.name}" loading="lazy">
+      <div class="insurance-products-grid">
+        <!-- Motor Insurance Card -->
+        <article class="ins-product-card">
+          <div class="ins-card-top">
+            <div class="ins-icon-badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 10.7 2 10.8 2 11v5c0 .6.4 1 1 1h2"/>
+                <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+              </svg>
+            </div>
+            <div class="ins-card-titles">
+              <h3>Motor Insurance</h3>
+              <span class="ins-card-meta">Comprehensive &amp; Third-Party</span>
+            </div>
           </div>
-          <div class="loc-card-body">
-            <span class="loc-card-tag">${item.tag}</span>
-            <h3>${item.name}</h3>
-            <p>${item.desc}</p>
-            <a class="card-action-link" href="booking.html?location=${encodeURIComponent(item.id)}">Explore location →</a>
+          <div class="ins-card-image-wrap">
+            <img src="assets/rib.webp" alt="Motor Insurance Protection" loading="lazy">
+            <span class="ins-badge-pill">Road &amp; Marine</span>
+          </div>
+          <div class="ins-card-content">
+            <p>Comprehensive and third-party coverage to protect you and your vehicle on the road and across the water.</p>
+            <a href="#quote-section" class="ins-card-link" data-product="Motor Insurance">Learn More <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
-        `).join('')}
+
+        <!-- Business Insurance Card -->
+        <article class="ins-product-card">
+          <div class="ins-card-top">
+            <div class="ins-icon-badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                <path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+              </svg>
+            </div>
+            <div class="ins-card-titles">
+              <h3>Business Insurance</h3>
+              <span class="ins-card-meta">Enterprise &amp; Operations</span>
+            </div>
+          </div>
+          <div class="ins-card-image-wrap">
+            <img src="assets/yacht.webp" alt="Business Insurance Protection" loading="lazy">
+            <span class="ins-badge-pill">Operations</span>
+          </div>
+          <div class="ins-card-content">
+            <p>Protect your business, employees, equipment, and operations from unexpected maritime delays and liability events.</p>
+            <a href="#quote-section" class="ins-card-link" data-product="Business Insurance">Learn More <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+
+        <!-- Property Insurance Card -->
+        <article class="ins-product-card">
+          <div class="ins-card-top">
+            <div class="ins-icon-badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="ins-card-titles">
+              <h3>Property Insurance</h3>
+              <span class="ins-card-meta">Residential &amp; Commercial</span>
+            </div>
+          </div>
+          <div class="ins-card-image-wrap">
+            <img src="assets/adventure-banner.webp" alt="Property Insurance Protection" loading="lazy">
+            <span class="ins-badge-pill">Asset Protection</span>
+          </div>
+          <div class="ins-card-content">
+            <p>Coverage for your home, commercial property, specialized equipment, and valuable waterfront assets against damage or loss.</p>
+            <a href="#quote-section" class="ins-card-link" data-product="Property Insurance">Learn More <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="insurance-benefits-bar" aria-label="Key highlights">
-      <div class="benefits-inner">
-        <div class="benefits-header">
-          <span class="benefits-eyebrow">A LITTLE CLOSER TO AN EXTRAORDINARY DAY</span>
+    <!-- SECTION 2: WHY CHOOSE CRICHTON INSURANCE AGENCY? -->
+    <section class="insurance-why-section" aria-label="Why Choose Crichton Insurance Agency">
+      <div class="why-section-header">
+        <span class="why-badge">WHY CHOOSE CRICHTON INSURANCE AGENCY?</span>
+        <h2>Dedicated Protection &amp; Proven Service Quality</h2>
+      </div>
+
+      <div class="why-features-grid">
+        <div class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3>7 Branches Islandwide</h3>
+          <p>Convenient locations across the island to serve you better with personal in-person and on-site support.</p>
         </div>
-        <div class="benefits-grid">
-          <div class="benefit-item">
-            <div class="benefit-icon-circle">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-            </div>
-            <h4>Places worth exploring</h4>
-            <p>Discover fjord scenery and island shores around Stavanger.</p>
+
+        <div class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
           </div>
-          <div class="benefit-item">
-            <div class="benefit-icon-circle">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h4>Your kind of pace</h4>
-            <p>Choose an active adventure or a slower moment on the water.</p>
+          <h3>Fast, Reliable Service</h3>
+          <p>Quick quotations, automated verification, and efficient claims support when you need it most.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
           </div>
-          <div class="benefit-item">
-            <div class="benefit-icon-circle">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="10" y1="3" y2="21"/><line x1="14" x2="14" y1="3" y2="21"/></svg>
-            </div>
-            <h4>More ways to explore</h4>
-            <p>Discover water bicycles, RIB boats and floating lounges.</p>
+          <h3>Experienced Advisors</h3>
+          <p>Our licensed team takes the time to understand your needs and help you choose the right coverage.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
+            </svg>
           </div>
-          <div class="benefit-item">
-            <div class="benefit-icon-circle">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
-            </div>
-            <h4>A simple starting point</h4>
-            <p>Choose an experience, set your date and review your plan.</p>
-          </div>
+          <h3>Digital Convenience</h3>
+          <p>Manage your policies, access instant certificates, and stay organized through our seamless AutoAssist platform.</p>
         </div>
       </div>
     </section>
 
-    <section class="adventure-split-section">
-      <div class="adventure-banner-card">
-        <div class="adventure-banner-copy">
-          <div class="banner-eyebrow">YOUR NEXT GREAT MOMENT</div>
-          <h2>Less ordinary.<br><em>More Norway.</em></h2>
-          <p>A new view is waiting just beyond the shore.</p>
+    <!-- SECTION 3: STAY ROAD READY WITH AUTOASSIST & GET A FREE QUOTE -->
+    <section class="insurance-quote-section" id="quote-section" aria-label="Get a Free Quote">
+      <div class="quote-banner-container">
+        <!-- Left Banner Side -->
+        <div class="quote-banner-left">
+          <span class="quote-banner-pill">AUTOASSIST PLATFORM</span>
+          <h2>Stay Road Ready with <span class="autoassist-brand">AutoAssist</span></h2>
+          <p class="quote-banner-tagline">The smart way to manage your vehicle and personal protection with real-time digital assistance.</p>
+
+          <div class="autoassist-perks">
+            <div class="perk-row">
+              <span class="perk-icon" aria-hidden="true">&#10003;</span>
+              <span>24/7 Islandwide Emergency Towing &amp; Roadside Recovery</span>
+            </div>
+            <div class="perk-row">
+              <span class="perk-icon" aria-hidden="true">&#10003;</span>
+              <span>Instant Digital Claims Submission with Real-time Status</span>
+            </div>
+            <div class="perk-row">
+              <span class="perk-icon" aria-hidden="true">&#10003;</span>
+              <span>Transparent Coverage &amp; Direct Experienced Advisors</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form Card -->
+        <div class="quote-banner-right">
+          <div class="quote-card-header">
+            <h3>Get a Free Quote</h3>
+            <p>Fill out the form below for an instant personalized quotation.</p>
+          </div>
+          <form class="ins-quote-form" id="insurance-quote-form">
+            <div class="ins-input-group">
+              <label for="quote-fullname">Full Name</label>
+              <input type="text" id="quote-fullname" placeholder="Enter your full name" required>
+            </div>
+            <div class="ins-input-group">
+              <label for="quote-email">Email Address</label>
+              <input type="email" id="quote-email" placeholder="name@example.com" required>
+            </div>
+            <div class="ins-input-group">
+              <label for="quote-type">Insurance Product</label>
+              <select id="quote-type">
+                <option value="motor">Motor Insurance</option>
+                <option value="business">Business Insurance</option>
+                <option value="property">Property Insurance</option>
+                <option value="autoassist">AutoAssist Package</option>
+              </select>
+            </div>
+            <button type="submit" class="glow-button ins-submit-quote-btn">GET A FREE QUOTE</button>
+            <div class="ins-quote-alert" id="ins-quote-alert" style="display:none;" role="status">
+              &#10003; Thank you! Your quotation request has been sent. An advisor will contact you within 15 minutes.
+            </div>
+          </form>
         </div>
       </div>
-      <div class="adventure-form-card">
-        <div class="form-eyebrow">MAKE IT YOURS</div>
-        <h2>Start your adventure</h2>
-        <form id="adv-booking-form">
-          <div class="adv-field">
-            <label for="adv-location">Where would you like to go?</label>
-            <select id="adv-location">
-              <option value="Lysefjorden">Lysefjorden</option>
-              <option value="Idse">Idse</option>
-              <option value="Ryfylke">Ryfylke</option>
-              <option value="Hidlefjorden">Hidlefjorden</option>
-              <option value="Hundvåg">Hundvåg</option>
-            </select>
-          </div>
-          <div class="adv-field">
-            <label for="adv-experience">Your experience</label>
-            <select id="adv-experience">
-              <option value="lounge">Inflatable Water Lounge</option>
-              <option value="rib">Passenger RIB Boat</option>
-              <option value="bicycle">Water Bicycle</option>
-              <option value="taxi">Private Taxi Boat</option>
-            </select>
-          </div>
-          <div class="adv-field">
-            <label for="adv-date">Preferred date</label>
-            <input type="date" id="adv-date">
-          </div>
-          <button type="submit" class="adv-submit-btn" id="adv-submit">Continue to booking</button>
-          <p class="adv-microcopy">Explore your options. Availability is confirmed separately.</p>
-        </form>
-      </div>
     </section>
-  </div>
-  `;
+  </div>`;
 
-  // Filter tabs logic
-  document.querySelectorAll('.loc-filter-tab').forEach(tab=>{
-    tab.onclick=()=>{
-      document.querySelectorAll('.loc-filter-tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
-      const cat=tab.dataset.category;
-      document.querySelectorAll('.loc-dest-card').forEach(card=>{
-        if(cat==='all'||card.dataset.category===cat){
-          card.style.display='flex';
-        }else{
-          card.style.display='none';
-        }
-      });
-    };
-  });
-
-  // Split form submission
-  const advForm=document.querySelector('#adv-booking-form');
-  if(advForm){
-    advForm.onsubmit=(e)=>{
+  // Interactive Quote Form Handling
+  const quoteForm = document.getElementById('insurance-quote-form');
+  const quoteAlert = document.getElementById('ins-quote-alert');
+  if(quoteForm){
+    quoteForm.addEventListener('submit', (e)=>{
       e.preventDefault();
-      const loc=document.querySelector('#adv-location')?.value||'Lysefjorden';
-      const exp=document.querySelector('#adv-experience')?.value||'lounge';
-      const dt=document.querySelector('#adv-date')?.value||'';
-      location.href=`booking.html?location=${encodeURIComponent(loc)}&experience=${encodeURIComponent(exp)}${dt?'&date='+encodeURIComponent(dt):''}`;
-    };
+      const submitBtn = quoteForm.querySelector('button[type="submit"]');
+      if(submitBtn) submitBtn.disabled = true;
+      if(quoteAlert){
+        quoteAlert.style.display = 'block';
+      }
+      setTimeout(()=>{
+        quoteForm.reset();
+        if(submitBtn) submitBtn.disabled = false;
+      }, 4000);
+    });
   }
+
+  // Pre-fill select on Learn More click
+  document.querySelectorAll('.ins-card-link').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      const prod = link.dataset.product;
+      const select = document.getElementById('quote-type');
+      if(select && prod){
+        if(prod.includes('Motor')) select.value = 'motor';
+        else if(prod.includes('Business')) select.value = 'business';
+        else if(prod.includes('Property')) select.value = 'property';
+      }
+    });
+  });
 }else if(!booking){
 const destinations=[
   {id:'lysefjorden',name:'Lysefjorden',img:'assets/lysefjorden.webp',tags:'Waterfalls · Pulpit Rock · Stunning fjord scenery'},
   {id:'idse',name:'Idse',img:'assets/idse.webp',tags:'Beaches · Islands · Calm waters'},
   {id:'hidlefjorden',name:'Hidlefjorden',img:'assets/hardangerfjord.webp',tags:'Islands · Swimming · Great for groups'},
   {id:'hundvag',name:'Hundvåg',img:'assets/mostraumen.webp',tags:'Beaches · Snorkeling · Family friendly'},
-  {id:'ryfylke',name:'Ryfylke',img:'assets/fosnavag.webp',tags:'Fjord adventure · Nature & wildlife'}
+  {id:'ryfylke',name:'Ryfylke',img:'assets/ryfylke.webp',tags:'Fjord adventure · Nature & wildlife'},
+  {id:'preikestolen',name:'Preikestolen',img:'assets/preikestolen.webp',tags:'Panoramic cliffs · Hiking & views'},
+  {id:'florli',name:'Flørli',img:'assets/florli.webp',tags:'Historic 4444 stairs · Pure nature'}
 ];
 app.innerHTML=`
-<section class="hero">
-  <h1>Rent Premium Water<br>Experiences in Norway</h1>
-  <p>FjordFlyt offers high-quality water bicycles, RIB boats,<br class="desktop-break"> inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p>
-  <a class="glow-button" href="booking.html">BOOK IT NOW</a>
+<section class="hero" id="hero-section">
+  <div class="hero-content">
+    <h1>Rent Premium Water<br>Experiences in Norway</h1>
+    <p>FjordFlyt offers high-quality water bicycles, RIB boats,<br class="desktop-break"> inflatable lounges, and yachts for rent.<br>Perfect for tours, activities, and unforgettable moments.</p>
+    <a class="glow-button" href="booking.html">BOOK IT NOW</a>
+  </div>
+
+  <div class="hero-interactive-stage" aria-hidden="true">
+    <div class="smoky-cursor-glow" id="smoky-cursor-glow"></div>
+    <div class="smoky-ambient-cloud cloud-bl"></div>
+
+    <div class="hero-floating-card" id="hero-floating-card">
+      <div class="floating-card-glass">
+        <div class="floating-card-header">
+          <h4>Lysefjorden RIB Safari &amp; Fjord Tours</h4>
+          <div class="floating-card-meta-row">
+            <div class="floating-card-tags">
+              <span class="f-tag tag-medium">Fast RIB</span>
+              <span class="f-tag tag-mgmt">Pulpit Rock</span>
+            </div>
+            <div class="floating-card-progress">
+              <svg class="prog-circle" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3"></circle>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="72, 100" stroke-linecap="round" transform="rotate(-90 18 18)"></circle>
+              </svg>
+              <span>85%</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-card-footer-meta">
+          <div class="f-avatars">
+            <span class="f-avatar av-1"></span>
+            <span class="f-avatar av-2"></span>
+          </div>
+          <div class="f-counts">
+            <span>⚓ Stavanger Base</span>
+            <span>⭐ 4.9 (120+ tours)</span>
+          </div>
+        </div>
+        <div class="floating-card-tasks">
+          <div class="f-task checked">
+            <span class="f-checkbox">✓</span>
+            <span class="f-task-title">Thermal Suits &amp; Lifejackets Included</span>
+          </div>
+          <div class="f-task checked">
+            <span class="f-checkbox">✓</span>
+            <span class="f-task-title">Certified Local Marine Captain</span>
+          </div>
+          <div class="f-task checked">
+            <span class="f-checkbox">✓</span>
+            <span class="f-task-title">Waterfalls &amp; Wildlife Sightseeing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="gallery-section">
@@ -286,13 +394,12 @@ app.innerHTML=`
     </div>
     <div class="dest-heading-right">
       <a class="dest-view-all" href="booking.html">View all locations →</a>
-      <div class="dest-nav-buttons">
-        <button class="dest-arrow dest-prev" aria-label="Previous destination">&#8249;</button>
-        <button class="dest-arrow dest-next" aria-label="Next destination">&#8250;</button>
-      </div>
     </div>
   </div>
   <div class="dest-carousel-wrap">
+    <button class="dest-slider-btn dest-slider-prev" id="dest-slider-prev" aria-label="Previous locations">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
     <div class="dest-carousel" id="dest-carousel">
       ${destinations.map((d,i)=>`
       <a class="dest-card" href="booking.html?location=${d.id}">
@@ -308,6 +415,9 @@ app.innerHTML=`
         </div>
       </a>`).join('')}
     </div>
+    <button class="dest-slider-btn dest-slider-next" id="dest-slider-next" aria-label="Next locations">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
   </div>
 </section>
 
@@ -382,9 +492,35 @@ app.innerHTML=`
 let slide=0;const cards=[...document.querySelectorAll('.gallery-card')],dots=[...document.querySelectorAll('.dot')];function showSlide(i){slide=(i+cards.length)%cards.length;cards.forEach((c,j)=>{let offset=(j-slide+cards.length)%cards.length;if(offset>2)offset-=cards.length;c.style.transform=`translateX(calc(-50% + ${offset*57}%)) translateZ(${-Math.abs(offset)*180}px) rotateY(${-offset*12}deg)`;c.style.opacity=Math.abs(offset)>1?'.35':'1';c.style.zIndex=5-Math.abs(offset);c.setAttribute('tabindex',offset===0?'0':'-1')});dots.forEach((d,j)=>{d.classList.toggle('active',j===slide);d.setAttribute('aria-pressed',j===slide)});document.querySelector('#slide-count').textContent=`${slide+1} / ${cards.length}`}showSlide(2);document.querySelectorAll('[data-slide]').forEach(b=>b.onclick=()=>showSlide(+b.dataset.slide));document.querySelector('.prev').onclick=()=>showSlide(slide-1);document.querySelector('.next').onclick=()=>showSlide(slide+1);let paused=false;document.querySelector('.gallery-frame').onmouseenter=()=>paused=true;document.querySelector('.gallery-frame').onmouseleave=()=>paused=false;document.querySelector('.gallery-frame').onfocusin=()=>paused=true;document.querySelector('.gallery-frame').onfocusout=()=>paused=false;if(!reduced)setInterval(()=>{if(!paused&&!document.hidden&&!document.documentElement.classList.contains('motion-paused'))showSlide(slide+1)},4500);
 // Destination carousel scroll
 const destCarousel=document.querySelector('#dest-carousel');
+const destPrev=document.querySelector('#dest-slider-prev')||document.querySelector('.dest-prev');
+const destNext=document.querySelector('#dest-slider-next')||document.querySelector('.dest-next');
 if(destCarousel){
-  document.querySelector('.dest-prev').onclick=()=>destCarousel.scrollBy({left:-260,behavior:'smooth'});
-  document.querySelector('.dest-next').onclick=()=>destCarousel.scrollBy({left:260,behavior:'smooth'});
+  if(destPrev) destPrev.onclick=()=>destCarousel.scrollBy({left:-290,behavior:'smooth'});
+  if(destNext) destNext.onclick=()=>destCarousel.scrollBy({left:290,behavior:'smooth'});
+}
+// Smoky light cursor hover effect on hero section
+const heroSec=document.querySelector('#hero-section');
+if(heroSec){
+  const card=document.querySelector('#hero-floating-card');
+  heroSec.addEventListener('pointermove',e=>{
+    const rect=heroSec.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    heroSec.style.setProperty('--smoke-x',`${x}px`);
+    heroSec.style.setProperty('--smoke-y',`${y}px`);
+    heroSec.style.setProperty('--smoke-opacity','1');
+  },{passive:true});
+  heroSec.addEventListener('pointerleave',()=>{
+    heroSec.style.setProperty('--smoke-opacity','0.35');
+  },{passive:true});
+  if(card){
+    card.addEventListener('pointerenter',()=>{
+      heroSec.style.setProperty('--card-glow','1');
+    });
+    card.addEventListener('pointerleave',()=>{
+      heroSec.style.setProperty('--card-glow','0');
+    });
+  }
 }
 // Featured location photo switcher
 const featImgs=['assets/lysefjorden.webp','assets/preikestolen.webp','assets/fjord.webp'];

@@ -1,0 +1,5 @@
+
+*.bak
+assets/backup/
+assets/*_clean.webp
+assets/test_*
