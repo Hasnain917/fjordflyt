@@ -1,0 +1,9 @@
+{
+  "name": "fjordflyt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fjordflyt - Norwegian Fjord Experiences",
+  "scripts": {
+    "build": "echo Static build complete"
+  }
+}
