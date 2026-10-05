@@ -3,3 +3,4 @@
 assets/backup/
 assets/*_clean.webp
 assets/test_*
+.vercel
