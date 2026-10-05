@@ -574,10 +574,18 @@ function setTheme(theme){
   if(theme==='dark'){
     document.documentElement.classList.add('theme-dark');
     document.documentElement.classList.remove('theme-light');
+    if(isInsurance){
+      document.body.style.backgroundColor = '#08090c';
+      document.body.style.color = '#ffffff';
+    }
     if(themeBtn){themeBtn.innerHTML=sunIcon;themeBtn.setAttribute('aria-label','Switch to light mode');themeBtn.title='Switch to light mode';}
   }else{
     document.documentElement.classList.remove('theme-dark');
     document.documentElement.classList.add('theme-light');
+    if(isInsurance){
+      document.body.style.backgroundColor = '#f8fafc';
+      document.body.style.color = '#0f172a';
+    }
     if(themeBtn){themeBtn.innerHTML=moonIcon;themeBtn.setAttribute('aria-label','Switch to dark mode');themeBtn.title='Switch to dark mode';}
   }
 }

@@ -7,7 +7,59 @@
   <title>Our Insurance Products — Comprehensive Coverage for What Matters Most</title>
   <meta name="description" content="Explore comprehensive insurance products: motor insurance, business insurance, and property protection with 24/7 AutoAssist.">
   <link rel="icon" href="assets/fjordflyt-logo.png">
-  <link rel="stylesheet" href="style.css?v=20261005d">
+  <link rel="stylesheet" href="style.css?v=20261005e">
+  <style id="insurance-theme-inline">
+    html:not(.theme-dark) body.insurance-page,
+    html.theme-light body.insurance-page,
+    body.insurance-page {
+      background: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    html:not(.theme-dark) .insurance-page header,
+    html.theme-light .insurance-page header {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+    }
+    html:not(.theme-dark) .insurance-page header nav a:not(.small-button),
+    html.theme-light .insurance-page header nav a:not(.small-button) {
+      color: #1e293b !important;
+    }
+    html:not(.theme-dark) .insurance-page .brand img,
+    html.theme-light .insurance-page .brand img {
+      filter: brightness(0.12) !important;
+    }
+    html:not(.theme-dark) .insurance-page .header-language,
+    html.theme-light .insurance-page .header-language {
+      color: #64748b !important;
+    }
+    html:not(.theme-dark) .insurance-page .theme-toggle,
+    html.theme-light .insurance-page .theme-toggle {
+      background: rgba(15, 23, 42, 0.05) !important;
+      border-color: rgba(15, 23, 42, 0.14) !important;
+      color: #0f172a !important;
+    }
+    html:not(.theme-dark) .insurance-page #reference-motion,
+    html.theme-light .insurance-page #reference-motion {
+      display: none !important;
+    }
+    html.theme-dark body.insurance-page {
+      background: #08090c !important;
+      color: #ffffff !important;
+    }
+    html.theme-dark .insurance-page header {
+      background: rgba(8, 9, 12, 0.88) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+    }
+    html.theme-dark .insurance-page header nav a:not(.small-button) {
+      color: #e2e8f0 !important;
+    }
+    html.theme-dark .insurance-page .brand img {
+      filter: none !important;
+    }
+    html.theme-dark .insurance-page #reference-motion {
+      display: block !important;
+    }
+  </style>
 </head>
 <body data-page="insurance" class="insurance-page">
   <div id="reference-motion" aria-hidden="true">
@@ -40,6 +92,6 @@
     <a href="booking.html">Plan your time on the water</a>
     <small>© <span id="year"></span> Fjordflyt</small>
   </footer>
-  <script src="app.js?v=20261005d"></script>
+  <script src="app.js?v=20261005e"></script>
 </body>
 </html>
